@@ -1,0 +1,1 @@
+Wrapper to use the [Synthesis Toolkit](https://ccrma.stanford.edu/software/stk/index.html) with [Cinder](https://libcinder.org/)
