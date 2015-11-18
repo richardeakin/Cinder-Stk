@@ -5,9 +5,7 @@
 #include "cinder/params/Params.h"
 
 #include "cinder/audio/audio.h"
-#include "stk/include/Stk.h"
-//#include "stk/include/BeeThree.h"
-#include "stk/include/Rhodey.h"
+#include "CinderStk.h"
 
 const float MAX_PITCH_MIDI	= 80;
 const float	MIN_PITCH_MIDI	= 40;
