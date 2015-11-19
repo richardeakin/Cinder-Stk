@@ -55,7 +55,6 @@
 		1146C0041BF9CF1400434C81 /* LentPitShift.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1146BFA61BF9CF1400434C81 /* LentPitShift.cpp */; };
 		1146C0061BF9CF1400434C81 /* Mandolin.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1146BFA81BF9CF1400434C81 /* Mandolin.cpp */; };
 		1146C0071BF9CF1400434C81 /* Mesh2D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1146BFA91BF9CF1400434C81 /* Mesh2D.cpp */; };
-		1146C0081BF9CF1400434C81 /* Messager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1146BFAA1BF9CF1400434C81 /* Messager.cpp */; };
 		1146C0091BF9CF1400434C81 /* MidiFileIn.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1146BFAB1BF9CF1400434C81 /* MidiFileIn.cpp */; };
 		1146C00A1BF9CF1400434C81 /* Modal.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1146BFAC1BF9CF1400434C81 /* Modal.cpp */; };
 		1146C00B1BF9CF1400434C81 /* ModalBar.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1146BFAD1BF9CF1400434C81 /* ModalBar.cpp */; };
@@ -73,8 +72,6 @@
 		1146C0181BF9CF1400434C81 /* PRCRev.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1146BFBA1BF9CF1400434C81 /* PRCRev.cpp */; };
 		1146C0191BF9CF1400434C81 /* Resonate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1146BFBB1BF9CF1400434C81 /* Resonate.cpp */; };
 		1146C01A1BF9CF1400434C81 /* Rhodey.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1146BFBC1BF9CF1400434C81 /* Rhodey.cpp */; };
-		1146C01B1BF9CF1400434C81 /* RtAudio.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1146BFBD1BF9CF1400434C81 /* RtAudio.cpp */; };
-		1146C01C1BF9CF1400434C81 /* RtMidi.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1146BFBE1BF9CF1400434C81 /* RtMidi.cpp */; };
 		1146C01F1BF9CF1400434C81 /* Sampler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1146BFC11BF9CF1400434C81 /* Sampler.cpp */; };
 		1146C0201BF9CF1400434C81 /* Saxofony.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1146BFC21BF9CF1400434C81 /* Saxofony.cpp */; };
 		1146C0211BF9CF1400434C81 /* Shakers.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1146BFC31BF9CF1400434C81 /* Shakers.cpp */; };
@@ -159,7 +156,6 @@
 		1146BF361BF9CF1400434C81 /* LentPitShift.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LentPitShift.h; sourceTree = "<group>"; };
 		1146BF371BF9CF1400434C81 /* Mandolin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Mandolin.h; sourceTree = "<group>"; };
 		1146BF381BF9CF1400434C81 /* Mesh2D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Mesh2D.h; sourceTree = "<group>"; };
-		1146BF391BF9CF1400434C81 /* Messager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Messager.h; sourceTree = "<group>"; };
 		1146BF3A1BF9CF1400434C81 /* MidiFileIn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MidiFileIn.h; sourceTree = "<group>"; };
 		1146BF3B1BF9CF1400434C81 /* Modal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Modal.h; sourceTree = "<group>"; };
 		1146BF3C1BF9CF1400434C81 /* ModalBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModalBar.h; sourceTree = "<group>"; };
@@ -178,8 +174,6 @@
 		1146BF4A1BF9CF1400434C81 /* ReedTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReedTable.h; sourceTree = "<group>"; };
 		1146BF4B1BF9CF1400434C81 /* Resonate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Resonate.h; sourceTree = "<group>"; };
 		1146BF4C1BF9CF1400434C81 /* Rhodey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Rhodey.h; sourceTree = "<group>"; };
-		1146BF4D1BF9CF1400434C81 /* RtAudio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RtAudio.h; sourceTree = "<group>"; };
-		1146BF4E1BF9CF1400434C81 /* RtMidi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RtMidi.h; sourceTree = "<group>"; };
 		1146BF511BF9CF1400434C81 /* Sampler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Sampler.h; sourceTree = "<group>"; };
 		1146BF521BF9CF1400434C81 /* Saxofony.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Saxofony.h; sourceTree = "<group>"; };
 		1146BF531BF9CF1400434C81 /* Shakers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Shakers.h; sourceTree = "<group>"; };
@@ -190,7 +184,6 @@
 		1146BF581BF9CF1400434C81 /* Skini.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Skini.h; sourceTree = "<group>"; };
 		1146BF591BF9CF1400434C81 /* SKINImsg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKINImsg.h; sourceTree = "<group>"; };
 		1146BF5A1BF9CF1400434C81 /* SKINItbl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKINItbl.h; sourceTree = "<group>"; };
-		1146BF5B1BF9CF1400434C81 /* Socket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Socket.h; sourceTree = "<group>"; };
 		1146BF5C1BF9CF1400434C81 /* Sphere.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Sphere.h; sourceTree = "<group>"; };
 		1146BF5D1BF9CF1400434C81 /* StifKarp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StifKarp.h; sourceTree = "<group>"; };
 		1146BF5E1BF9CF1400434C81 /* Stk.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Stk.h; sourceTree = "<group>"; };
@@ -245,7 +238,6 @@
 		1146BFA61BF9CF1400434C81 /* LentPitShift.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LentPitShift.cpp; sourceTree = "<group>"; };
 		1146BFA81BF9CF1400434C81 /* Mandolin.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Mandolin.cpp; sourceTree = "<group>"; };
 		1146BFA91BF9CF1400434C81 /* Mesh2D.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Mesh2D.cpp; sourceTree = "<group>"; };
-		1146BFAA1BF9CF1400434C81 /* Messager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Messager.cpp; sourceTree = "<group>"; };
 		1146BFAB1BF9CF1400434C81 /* MidiFileIn.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MidiFileIn.cpp; sourceTree = "<group>"; };
 		1146BFAC1BF9CF1400434C81 /* Modal.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Modal.cpp; sourceTree = "<group>"; };
 		1146BFAD1BF9CF1400434C81 /* ModalBar.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ModalBar.cpp; sourceTree = "<group>"; };
@@ -263,8 +255,6 @@
 		1146BFBA1BF9CF1400434C81 /* PRCRev.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PRCRev.cpp; sourceTree = "<group>"; };
 		1146BFBB1BF9CF1400434C81 /* Resonate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Resonate.cpp; sourceTree = "<group>"; };
 		1146BFBC1BF9CF1400434C81 /* Rhodey.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Rhodey.cpp; sourceTree = "<group>"; };
-		1146BFBD1BF9CF1400434C81 /* RtAudio.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RtAudio.cpp; sourceTree = "<group>"; };
-		1146BFBE1BF9CF1400434C81 /* RtMidi.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RtMidi.cpp; sourceTree = "<group>"; };
 		1146BFC11BF9CF1400434C81 /* Sampler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Sampler.cpp; sourceTree = "<group>"; };
 		1146BFC21BF9CF1400434C81 /* Saxofony.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Saxofony.cpp; sourceTree = "<group>"; };
 		1146BFC31BF9CF1400434C81 /* Shakers.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Shakers.cpp; sourceTree = "<group>"; };
@@ -422,7 +412,6 @@
 				1146BF361BF9CF1400434C81 /* LentPitShift.h */,
 				1146BF371BF9CF1400434C81 /* Mandolin.h */,
 				1146BF381BF9CF1400434C81 /* Mesh2D.h */,
-				1146BF391BF9CF1400434C81 /* Messager.h */,
 				1146BF3A1BF9CF1400434C81 /* MidiFileIn.h */,
 				1146BF3B1BF9CF1400434C81 /* Modal.h */,
 				1146BF3C1BF9CF1400434C81 /* ModalBar.h */,
@@ -441,8 +430,6 @@
 				1146BF4A1BF9CF1400434C81 /* ReedTable.h */,
 				1146BF4B1BF9CF1400434C81 /* Resonate.h */,
 				1146BF4C1BF9CF1400434C81 /* Rhodey.h */,
-				1146BF4D1BF9CF1400434C81 /* RtAudio.h */,
-				1146BF4E1BF9CF1400434C81 /* RtMidi.h */,
 				1146BF511BF9CF1400434C81 /* Sampler.h */,
 				1146BF521BF9CF1400434C81 /* Saxofony.h */,
 				1146BF531BF9CF1400434C81 /* Shakers.h */,
@@ -453,7 +440,6 @@
 				1146BF581BF9CF1400434C81 /* Skini.h */,
 				1146BF591BF9CF1400434C81 /* SKINImsg.h */,
 				1146BF5A1BF9CF1400434C81 /* SKINItbl.h */,
-				1146BF5B1BF9CF1400434C81 /* Socket.h */,
 				1146BF5C1BF9CF1400434C81 /* Sphere.h */,
 				1146BF5D1BF9CF1400434C81 /* StifKarp.h */,
 				1146BF5E1BF9CF1400434C81 /* Stk.h */,
@@ -516,7 +502,6 @@
 				1146BFA61BF9CF1400434C81 /* LentPitShift.cpp */,
 				1146BFA81BF9CF1400434C81 /* Mandolin.cpp */,
 				1146BFA91BF9CF1400434C81 /* Mesh2D.cpp */,
-				1146BFAA1BF9CF1400434C81 /* Messager.cpp */,
 				1146BFAB1BF9CF1400434C81 /* MidiFileIn.cpp */,
 				1146BFAC1BF9CF1400434C81 /* Modal.cpp */,
 				1146BFAD1BF9CF1400434C81 /* ModalBar.cpp */,
@@ -534,8 +519,6 @@
 				1146BFBA1BF9CF1400434C81 /* PRCRev.cpp */,
 				1146BFBB1BF9CF1400434C81 /* Resonate.cpp */,
 				1146BFBC1BF9CF1400434C81 /* Rhodey.cpp */,
-				1146BFBD1BF9CF1400434C81 /* RtAudio.cpp */,
-				1146BFBE1BF9CF1400434C81 /* RtMidi.cpp */,
 				1146BFC11BF9CF1400434C81 /* Sampler.cpp */,
 				1146BFC21BF9CF1400434C81 /* Saxofony.cpp */,
 				1146BFC31BF9CF1400434C81 /* Shakers.cpp */,
@@ -722,7 +705,6 @@
 				1146BFDE1BF9CF1400434C81 /* BiQuad.cpp in Sources */,
 				1146C0241BF9CF1400434C81 /* SingWave.cpp in Sources */,
 				1146C0201BF9CF1400434C81 /* Saxofony.cpp in Sources */,
-				1146C0081BF9CF1400434C81 /* Messager.cpp in Sources */,
 				1146C0131BF9CF1400434C81 /* PercFlut.cpp in Sources */,
 				1146BFE71BF9CF1400434C81 /* Clarinet.cpp in Sources */,
 				1146C0351BF9CF1400434C81 /* VoicForm.cpp in Sources */,
@@ -756,8 +738,6 @@
 				1146C0151BF9CF1400434C81 /* PitShift.cpp in Sources */,
 				1146C0121BF9CF1400434C81 /* OneZero.cpp in Sources */,
 				1146C0191BF9CF1400434C81 /* Resonate.cpp in Sources */,
-				1146C01B1BF9CF1400434C81 /* RtAudio.cpp in Sources */,
-				1146C01C1BF9CF1400434C81 /* RtMidi.cpp in Sources */,
 				1146C0341BF9CF1400434C81 /* Voicer.cpp in Sources */,
 				1146BFE61BF9CF1400434C81 /* Chorus.cpp in Sources */,
 			);
