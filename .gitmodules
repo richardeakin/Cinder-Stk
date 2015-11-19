@@ -1,3 +1,0 @@
-[submodule "lib/stk"]
-	path = lib/stk
-	url = git@github.com:thestk/stk.git
