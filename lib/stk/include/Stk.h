@@ -68,7 +68,7 @@ namespace stk {
 */
 /***************************************************/
 
-#define _STK_DEBUG_
+//#define _STK_DEBUG_
 
 // Most data in STK is passed and calculated with the
 // following user-definable floating-point type.  You
