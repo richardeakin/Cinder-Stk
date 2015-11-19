@@ -28,15 +28,23 @@ protected:
 		CI_LOG_I( "num channels: " << getNumChannels() );
 
 		mStkFrames = stk::StkFrames( getFramesPerBlock(), getNumChannels() );
-//		mStkFrames = stk::StkFrames( getFramesPerBlock(), 2 );
 
-		mReverb.setEffectMix( 0.6f );
+		mReverb.setEffectMix( 0.7f );
+
+		mReverb.setDamping( 0.6f );
+		mReverb.setRoomSize( 0.5f );
 	}
 
 
 	void process( ci::audio::Buffer *buffer ) override
 	{
 		mSynth.tick( mStkFrames );
+
+		// For Freeverb, copy channel 0 to channel 1
+		for( size_t i = 0; i < buffer->getNumFrames(); i++ ) {
+			mStkFrames( i, 1 ) = mStkFrames( i, 0 );
+		}
+
 		mReverb.tick( mStkFrames );
 
 		for( size_t ch = 0; ch < buffer->getNumChannels(); ch++ ) {
@@ -49,9 +57,9 @@ protected:
 
 public:
 	stk::Rhodey mSynth;
-	stk::NRev	mReverb;
+//	stk::NRev	mReverb;
 //	stk::JCRev	mReverb;
-//	stk::FreeVerb	mReverb; // TODO: figure out what's wrong with this one
+	stk::FreeVerb	mReverb;
 
 	stk::StkFrames mStkFrames;
 };
@@ -74,6 +82,8 @@ class StkTestApp : public App {
 	StkTestNodeRef			mStkNode;
 
 	params::InterfaceGlRef	mParams;
+
+	float mLastFreq = 0;
 };
 
 void StkTestApp::setup()
@@ -134,8 +144,13 @@ void StkTestApp::draw()
 void StkTestApp::makeNote( const vec2 &pos )
 {
 	float freq = quantizePitch( pos );
-	float gain = 1.0f - pos.y / (float)getWindowHeight();
+	if( fabs( mLastFreq - freq ) < 0.01f ) {
+		return;
+	}
 
+	mLastFreq = freq;
+
+	float gain = 1.0f - pos.y / (float)getWindowHeight();
 	mStkNode->mSynth.noteOn( freq, gain );
 }
 
