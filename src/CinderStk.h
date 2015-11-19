@@ -86,3 +86,10 @@
 #include "stk/include/VoicForm.h"
 #include "stk/include/Whistle.h"
 #include "stk/include/Wurley.h"
+
+namespace cistk {
+
+//! Uitility method that searchs for the stk's rawwaves folder, first within an app assets directory, then relative to the repo (useful during development)
+void initRawwavePath();
+
+} // namespace cistk

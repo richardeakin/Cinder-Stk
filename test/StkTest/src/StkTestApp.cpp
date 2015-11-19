@@ -16,35 +16,44 @@ using namespace std;
 
 typedef std::shared_ptr<class StkTestNode> StkTestNodeRef;
 
-// TODO: make this a templated type on different Stk types (Instrment, Filter, etc)
 class StkTestNode : public ci::audio::Node {
 public:
 	StkTestNode()
-		: Node( audio::Node::Format() )
+		: Node( audio::Node::Format().channels( 2 ) )
 	{}
 
 protected:
 	void initialize() override
 	{
-
 		CI_LOG_I( "num channels: " << getNumChannels() );
+
+		mStkFrames = stk::StkFrames( getFramesPerBlock(), getNumChannels() );
+//		mStkFrames = stk::StkFrames( getFramesPerBlock(), 2 );
+
+		mReverb.setEffectMix( 0.6f );
 	}
 
-	// TODO NEXT: try out NRev, FreeVerb, and FCRev
-	
+
 	void process( ci::audio::Buffer *buffer ) override
 	{
-		stk::StkFrames synthFrames( buffer->getNumFrames(), buffer->getNumChannels() );
-		mSynth.tick( synthFrames );
+		mSynth.tick( mStkFrames );
+		mReverb.tick( mStkFrames );
 
-		float *data = buffer->getData();
-		for( size_t i = 0; i < buffer->getNumFrames(); i++ ) {
-			data[i] = synthFrames( i, 0 );
+		for( size_t ch = 0; ch < buffer->getNumChannels(); ch++ ) {
+			float *channel = buffer->getChannel( ch );
+			for( size_t i = 0; i < buffer->getNumFrames(); i++ ) {
+				channel[i] = mStkFrames( i, ch );
+			}
 		}
 	}
 
 public:
 	stk::Rhodey mSynth;
+	stk::NRev	mReverb;
+//	stk::JCRev	mReverb;
+//	stk::FreeVerb	mReverb; // TODO: figure out what's wrong with this one
+
+	stk::StkFrames mStkFrames;
 };
 
 class StkTestApp : public App {
@@ -73,10 +82,7 @@ void StkTestApp::setup()
 
 	stk::Stk::setSampleRate( ctx->getSampleRate() );
 
-	// TODO: make method that sets this using a variety of search locations
-	// - relative to source code using __FILE__
-	// - rawwaves file in assets dir
-	stk::Stk::setRawwavePath( "/Users/r/code/cinder/rte/Cinder-Stk/lib/stk/rawwaves" );
+	cistk::initRawwavePath();
 
 	mStkNode = ctx->makeNode<StkTestNode>();
 	mGain = ctx->makeNode<audio::GainNode>( 0.75f );
