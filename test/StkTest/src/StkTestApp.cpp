@@ -81,7 +81,7 @@ class StkTestApp : public App {
 	ci::audio::GainNodeRef	mGain;
 	StkTestNodeRef			mStkNode;
 
-	std::shared_ptr<cistk::InstrumentNode<stk::BlowBotl>>	mBlowBottle;
+	cistk::InstrumentNodeRef	mInstrument;
 
 	params::InterfaceGlRef	mParams;
 
@@ -93,17 +93,17 @@ void StkTestApp::setup()
 	auto ctx = audio::master();
 
 	stk::Stk::setSampleRate( ctx->getSampleRate() );
-
 	cistk::initRawwavePath();
 
 	mStkNode = ctx->makeNode<StkTestNode>();
 	mGain = ctx->makeNode<audio::GainNode>( 0.75f );
 
-	mBlowBottle = ctx->makeNode<cistk::InstrumentNode<stk::BlowBotl>>();
+//	mBlowBottle = ctx->makeNode<cistk::InstrumentNode<stk::BlowBotl>>();
+	mInstrument = ctx->makeNode<cistk::BlowBotlNode>();
 
 //	mStkNode >> mGain >> ctx->getOutput();
-	mBlowBottle >> mGain >> ctx->getOutput();
-	mBlowBottle->enable();
+	mInstrument >> mGain >> ctx->getOutput();
+//	mBlowBottle->enable();
 
 	ctx->enable();
 
@@ -133,7 +133,7 @@ void StkTestApp::mouseDrag( MouseEvent event )
 
 void StkTestApp::mouseUp( MouseEvent event )
 {
-	mBlowBottle->getInstrument().noteOff( 0.5 );
+	mInstrument->noteOff( 0.5 );
 }
 
 void StkTestApp::update()
@@ -157,8 +157,7 @@ void StkTestApp::makeNote( const vec2 &pos )
 	mLastFreq = freq;
 
 	float gain = 1.0f - pos.y / (float)getWindowHeight();
-//	mStkNode->mSynth.noteOn( freq, gain );
-	mBlowBottle->getInstrument().noteOn( freq, gain );
+	mInstrument->noteOn( freq, gain );
 }
 
 // returns a quantized pitch (in hertz) within the minor scale
