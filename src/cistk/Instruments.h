@@ -26,6 +26,14 @@
 #include "stk/include/VoicForm.h"
 #include "stk/include/Whistle.h"
 
+#include "stk/include/BeeThree.h"
+#include "stk/include/FMVoices.h"
+#include "stk/include/HevyMetl.h"
+#include "stk/include/PercFlut.h"
+#include "stk/include/Rhodey.h"
+#include "stk/include/TubeBell.h"
+#include "stk/include/Wurley.h"
+
 namespace cistk {
 
 typedef std::shared_ptr<class InstrumentNode>	InstrumentNodeRef;
@@ -201,6 +209,58 @@ class VoicFormNode : public InstrumentNode, public stk::VoicForm {
 class WhistleNode : public InstrumentNode, public stk::Whistle {
   public:
 	WhistleNode( const ci::audio::Node::Format &format = Format() )
+		: InstrumentNode( this, format )
+	{}
+};
+
+// ------------
+// FM sub-types
+
+class BeeThreeNode : public InstrumentNode, public stk::BeeThree {
+  public:
+	BeeThreeNode( const ci::audio::Node::Format &format = Format() )
+		: InstrumentNode( this, format )
+	{}
+};
+
+class FMVoicesNode : public InstrumentNode, public stk::FMVoices {
+  public:
+	FMVoicesNode( const ci::audio::Node::Format &format = Format() )
+		: InstrumentNode( this, format )
+	{}
+};
+
+class HevyMetlNode : public InstrumentNode, public stk::HevyMetl {
+  public:
+	HevyMetlNode( const ci::audio::Node::Format &format = Format() )
+		: InstrumentNode( this, format )
+	{}
+};
+
+class PercFlutNode : public InstrumentNode, public stk::PercFlut {
+  public:
+	PercFlutNode( const ci::audio::Node::Format &format = Format() )
+		: InstrumentNode( this, format )
+	{}
+};
+
+class RhodeyNode : public InstrumentNode, public stk::Rhodey {
+  public:
+	RhodeyNode( const ci::audio::Node::Format &format = Format() )
+		: InstrumentNode( this, format )
+	{}
+};
+
+class TubeBellNode : public InstrumentNode, public stk::TubeBell {
+  public:
+	TubeBellNode( const ci::audio::Node::Format &format = Format() )
+		: InstrumentNode( this, format )
+	{}
+};
+
+class WurleyNode : public InstrumentNode, public stk::Wurley {
+  public:
+	WurleyNode( const ci::audio::Node::Format &format = Format() )
 		: InstrumentNode( this, format )
 	{}
 };

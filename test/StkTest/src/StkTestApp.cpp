@@ -112,7 +112,7 @@ void StkTestApp::setup()
 
 void StkTestApp::setupParams()
 {
-	mParams = params::InterfaceGl::create( getWindow(), "Stk params", toPixels( ivec2( 200, 300 ) ) );
+	mParams = params::InterfaceGl::create( getWindow(), "Stk params", toPixels( ivec2( 300, 200 ) ) );
 
 	mParams->addParam<float>( "master gain",
 					  [this]( float value ) { mGain->setValue( value ); },
@@ -123,7 +123,8 @@ void StkTestApp::setupParams()
 		"BandedWG", "BlowBotl", "BlowHole", "Bowed", "Brass", "Clarinet",
 		"Drummer", "Flute", "Mandolin", "Mesh2D", "ModalBar", "Moog",
 		"Plucked", "Resonate", "Saxofony", "Shakers", "Simple",	"Sitar",
-		"StifKarp", "VoicForm", "Whistle"
+		"StifKarp", "VoicForm", "Whistle",	"BeeThree", "FMVoices", "HevyMetl",
+		"PercFlut", "Rhodey", "TubeBell", "Wurley"
 	};
 	mParams->addParam( "instrument", mInstrumentEnumNames, &mInstrumentEnumSelection )
 		.keyDecr( "[" ).keyIncr( "]" )
@@ -236,8 +237,26 @@ void StkTestApp::handleInstrumentSelected()
 		instr->quiet();
 		mInstrument = instr;
 	}
-	else if( name == "Whistle" ) {
-		mInstrument = ctx->makeNode<cistk::WhistleNode>();
+	else if( name == "BeeThree" ) {
+		mInstrument = ctx->makeNode<cistk::BeeThreeNode>();
+	}
+	else if( name == "FMVoices" ) {
+		mInstrument = ctx->makeNode<cistk::FMVoicesNode>();
+	}
+	else if( name == "HevyMetl" ) {
+		mInstrument = ctx->makeNode<cistk::HevyMetlNode>();
+	}
+	else if( name == "PercFlut" ) {
+		mInstrument = ctx->makeNode<cistk::PercFlutNode>();
+	}
+	else if( name == "Rhodey" ) {
+		mInstrument = ctx->makeNode<cistk::RhodeyNode>();
+	}
+	else if( name == "TubeBell" ) {
+		mInstrument = ctx->makeNode<cistk::TubeBellNode>();
+	}
+	else if( name == "Wurley" ) {
+		mInstrument = ctx->makeNode<cistk::WurleyNode>();
 	}
 	else {
 		CI_LOG_E( "unknowned instrument name" );
