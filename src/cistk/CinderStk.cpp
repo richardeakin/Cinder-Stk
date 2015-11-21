@@ -1,5 +1,6 @@
 
-#include "CinderStk.h"
+#include "cistk/CinderStk.h"
+
 #include "cinder/Log.h"
 #include "cinder/app/Platform.h"
 
