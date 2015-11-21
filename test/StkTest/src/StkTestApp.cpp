@@ -79,16 +79,18 @@ class StkTestApp : public App {
 	void handleInstrumentSelected();
 	void handleEffectSelected();
 	bool handleInstrumentSpecificNote( const vec2 &pos );
-
+	void printAudioGraph();
 
 	ci::audio::GainNodeRef	mGain;
-	StkTestNodeRef			mStkNode;
+//	StkTestNodeRef			mStkNode;
 
 	cistk::InstrumentNodeRef	mInstrument;
+	cistk::EffectNodeRef		mEffect;
 
 	params::InterfaceGlRef	mParams;
-	vector<string>			mInstrumentEnumNames;
-	int						mInstrumentEnumSelection = 0;
+	vector<string>			mInstrumentEnumNames, mEffectEnumNames;
+	int						mInstrumentEnumSelection = 12;
+	int						mEffectEnumSelection = 7;
 
 	float mLastFreq = 0;
 };
@@ -100,14 +102,17 @@ void StkTestApp::setup()
 	stk::Stk::setSampleRate( ctx->getSampleRate() );
 	cistk::initRawwavePath();
 
-	mStkNode = ctx->makeNode<StkTestNode>();
+//	mStkNode = ctx->makeNode<StkTestNode>();
 	mGain = ctx->makeNode<audio::GainNode>( 0.85f );
 	mGain >> ctx->getOutput();
 
 	setupParams();
 
 	handleInstrumentSelected();
+	handleEffectSelected();
 	ctx->enable();
+
+	printAudioGraph();
 }
 
 void StkTestApp::setupParams()
@@ -128,7 +133,21 @@ void StkTestApp::setupParams()
 	};
 	mParams->addParam( "instrument", mInstrumentEnumNames, &mInstrumentEnumSelection )
 		.keyDecr( "[" ).keyIncr( "]" )
-		.updateFn( [this] { handleInstrumentSelected(); } );
+		.updateFn( [this] { handleInstrumentSelected(); printAudioGraph(); } );
+
+	mEffectEnumNames = {
+		"none", "Echo", "Chorus", "PitShift", "LentPitShift",
+		"PRCRev", "JCRev", "NRev", "FreeVerb"
+	};
+	mParams->addParam( "effect", mEffectEnumNames, &mEffectEnumSelection )
+		.keyDecr( ";" ).keyIncr( "'" )
+		.updateFn( [this] { handleEffectSelected(); printAudioGraph(); } );
+
+}
+
+void StkTestApp::printAudioGraph()
+{
+	CI_LOG_I( "\n" << audio::master()->printGraphToString() );
 }
 
 void StkTestApp::mouseDown( MouseEvent event )
@@ -263,13 +282,69 @@ void StkTestApp::handleInstrumentSelected()
 		CI_ASSERT_NOT_REACHABLE();
 	}
 
-	mInstrument >> mGain >> ctx->getOutput();
+	if( mEffect ) {
+		mInstrument >> mEffect >> mGain;
+	}
+	else {
+		mInstrument >> mGain;
+	}
 
-	CI_LOG_I( "graph:\n" << ctx->printGraphToString() );
+	mGain >> ctx->getOutput();
 }
 
 void StkTestApp::handleEffectSelected()
 {
+	CI_ASSERT( mInstrument );
+
+	mGain->disconnectAll();
+	if( mEffect )
+		mEffect->disconnectAll();
+
+	string name = mEffectEnumNames.at( mEffectEnumSelection );
+	CI_LOG_I( "selecting effect '" << name << "'" );
+
+	auto ctx = audio::master();
+
+	if( name == "none" ) {
+		// reset and bypass effect
+		mEffect.reset();
+		mInstrument >> mGain >> ctx->getOutput();
+		return;
+	}
+	else if( name == "Echo" ) {
+		mEffect = ctx->makeNode<cistk::EchoNode>();
+	}
+	else if( name == "Chorus" ) {
+		mEffect = ctx->makeNode<cistk::ChorusNode>();
+	}
+	else if( name == "PitShift" ) {
+		auto effect = ctx->makeNode<cistk::PitShiftNode>();
+		effect->setShift( 0.5f );
+		mEffect = effect;
+	}
+	else if( name == "LentPitShift" ) {
+		auto effect = ctx->makeNode<cistk::LentPitShiftNode>();
+		effect->setShift( 0.5f );
+		mEffect = effect;
+	}
+	else if( name == "PRCRev" ) {
+		mEffect = ctx->makeNode<cistk::PRCRevNode>();
+	}
+	else if( name == "JCRev" ) {
+		mEffect = ctx->makeNode<cistk::JCRevNode>();
+	}
+	else if( name == "NRev" ) {
+		mEffect = ctx->makeNode<cistk::NRevNode>();
+	}
+	else if( name == "FreeVerb" ) {
+		mEffect = ctx->makeNode<cistk::FreeVerbNode>();
+	}
+	else {
+		CI_LOG_E( "unknowned effect name" );
+		CI_ASSERT_NOT_REACHABLE();
+	}
+
+	mInstrument >> mEffect >> mGain >> ctx->getOutput();
 }
 
 void StkTestApp::makeNote( const vec2 &pos )

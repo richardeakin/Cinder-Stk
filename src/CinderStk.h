@@ -88,6 +88,7 @@
 #include "stk/include/Wurley.h"
 
 #include "cistk/Instruments.h"
+#include "cistk/Effects.h"
 
 namespace cistk {
 
