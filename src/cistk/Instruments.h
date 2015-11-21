@@ -1,3 +1,7 @@
+// Copyright (c) 2015, Richard Eakin
+// Use of this source code is governed by a BSD-style license that can be found in the LICENSE.txt file.
+// The STK source code comes with its own BSD-style license, see lib/stk/LICENSE
+
 #pragma once
 
 #include "cinder/audio/GenNode.h"
