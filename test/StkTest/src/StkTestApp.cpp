@@ -78,6 +78,7 @@ class StkTestApp : public App {
 	float quantizePitch( const vec2 &pos );
 	void handleInstrumentSelected();
 	void handleEffectSelected();
+	bool handleInstrumentSpecificNote( const vec2 &pos );
 
 
 	ci::audio::GainNodeRef	mGain;
@@ -100,7 +101,7 @@ void StkTestApp::setup()
 	cistk::initRawwavePath();
 
 	mStkNode = ctx->makeNode<StkTestNode>();
-	mGain = ctx->makeNode<audio::GainNode>( 0.75f );
+	mGain = ctx->makeNode<audio::GainNode>( 0.85f );
 	mGain >> ctx->getOutput();
 
 	setupParams();
@@ -118,7 +119,12 @@ void StkTestApp::setupParams()
 					  [this] { return mGain->getValue(); }
 	).min( 0.0f ).max( 1.0f ).step( 0.05f );
 
-	mInstrumentEnumNames = { "BandedWG", "BlowBotl", "BlowHole", "Bowed" };
+	mInstrumentEnumNames = {
+		"BandedWG", "BlowBotl", "BlowHole", "Bowed", "Brass", "Clarinet",
+		"Drummer", "Flute", "Mandolin", "Mesh2D", "ModalBar", "Moog",
+		"Plucked", "Resonate", "Saxofony", "Shakers", "Simple",	"Sitar",
+		"StifKarp", "VoicForm", "Whistle"
+	};
 	mParams->addParam( "instrument", mInstrumentEnumNames, &mInstrumentEnumSelection )
 		.keyDecr( "[" ).keyIncr( "]" )
 		.updateFn( [this] { handleInstrumentSelected(); } );
@@ -173,6 +179,70 @@ void StkTestApp::handleInstrumentSelected()
 	else if( name == "Bowed" ) {
 		mInstrument = ctx->makeNode<cistk::BowedNode>();
 	}
+	else if( name == "Brass" ) {
+		mInstrument = ctx->makeNode<cistk::BrassNode>();
+	}
+	else if( name == "Clarinet" ) {
+		mInstrument = ctx->makeNode<cistk::ClarinetNode>();
+	}
+	else if( name == "Drummer" ) {
+		mInstrument = ctx->makeNode<cistk::DrummerNode>();
+	}
+	else if( name == "Flute" ) {
+		mInstrument = ctx->makeNode<cistk::FluteNode>();
+	}
+	else if( name == "Mandolin" ) {
+		mInstrument = ctx->makeNode<cistk::MandolinNode>();
+	}
+	else if( name == "Mesh2D" ) {
+		auto instr = ctx->makeNode<cistk::Mesh2DNode>();
+		instr->setDecay( 0.9f );
+		mInstrument = instr;
+	}
+	else if( name == "ModalBar" ) {
+		auto instr = ctx->makeNode<cistk::ModalBarNode>();
+		instr->setPreset( 1 ); // preset: 'Vibraphone'
+		mInstrument = instr;
+	}
+	else if( name == "Moog" ) {
+		mInstrument = ctx->makeNode<cistk::MoogNode>();
+	}
+	else if( name == "Plucked" ) {
+		mInstrument = ctx->makeNode<cistk::PluckedNode>();
+	}
+	else if( name == "Resonate" ) {
+		mInstrument = ctx->makeNode<cistk::ResonateNode>();
+	}
+	else if( name == "Saxofony" ) {
+		mInstrument = ctx->makeNode<cistk::SaxofonyNode>();
+	}
+	else if( name == "Shakers" ) {
+		mInstrument = ctx->makeNode<cistk::ShakersNode>();
+	}
+	else if( name == "Simple" ) {
+		mInstrument = ctx->makeNode<cistk::SimpleNode>();
+	}
+	else if( name == "Sitar" ) {
+		mInstrument = ctx->makeNode<cistk::SitarNode>();
+	}
+	else if( name == "StifKarp" ) {
+		mInstrument = ctx->makeNode<cistk::StifKarpNode>();
+	}
+	else if( name == "VoicForm" ) {
+		auto instr = ctx->makeNode<cistk::VoicFormNode>();
+		if( ! instr->setPhoneme( "ooo" ) ) {
+			CI_LOG_W( "phoneme not found" );
+		}
+		instr->quiet();
+		mInstrument = instr;
+	}
+	else if( name == "Whistle" ) {
+		mInstrument = ctx->makeNode<cistk::WhistleNode>();
+	}
+	else {
+		CI_LOG_E( "unknowned instrument name" );
+		CI_ASSERT_NOT_REACHABLE();
+	}
 
 	mInstrument >> mGain >> ctx->getOutput();
 
@@ -185,6 +255,9 @@ void StkTestApp::handleEffectSelected()
 
 void StkTestApp::makeNote( const vec2 &pos )
 {
+	if( handleInstrumentSpecificNote( pos ) )
+		return;
+
 	float freq = quantizePitch( pos );
 	if( fabs( mLastFreq - freq ) < 0.01f ) {
 		return;
@@ -194,6 +267,28 @@ void StkTestApp::makeNote( const vec2 &pos )
 
 	float gain = 1.0f - pos.y / (float)getWindowHeight();
 	mInstrument->noteOn( freq, gain );
+}
+
+// Returns true if the note was handled completely and makeNote() shouldn't do anything else
+bool StkTestApp::handleInstrumentSpecificNote( const vec2 &pos )
+{
+	vec2 posNormalized = glm::clamp( pos / vec2( getWindowSize() ), vec2( 0 ), vec2( 1 ) );
+	posNormalized.y = 1.0f - posNormalized.y;
+
+	auto mesh2D = dynamic_pointer_cast<cistk::Mesh2DNode>( mInstrument );
+	if( mesh2D ) {
+		mesh2D->setInputPosition( posNormalized.x, posNormalized.y );
+		mInstrument->noteOn( 0, 1.0f );
+		return true;
+	}
+
+	auto modalBar = dynamic_pointer_cast<cistk::ModalBarNode>( mInstrument );
+	if( modalBar ) {
+		modalBar->setStickHardness( posNormalized.y );
+		return false;
+	}
+
+	return false;
 }
 
 // returns a quantized pitch (in hertz) within the minor scale
