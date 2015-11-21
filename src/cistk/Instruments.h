@@ -41,19 +41,32 @@ class InstrumentNode : public ci::audio::GenNode {
 };
 
 
-//BandedWG
+class BandedWGNode : public InstrumentNode, public stk::BandedWG {
+  public:
+	BandedWGNode( const ci::audio::Node::Format &format = Format() )
+		: InstrumentNode( this, format )
+	{}
+};
 
-class BlowBotlNode : public InstrumentNode, stk::BlowBotl {
+class BlowBotlNode : public InstrumentNode, public stk::BlowBotl {
   public:
 	BlowBotlNode( const ci::audio::Node::Format &format = Format() )
 		: InstrumentNode( this, format )
 	{}
 };
 
+class BlowHoleNode : public InstrumentNode, public stk::BlowHole {
+  public:
+	BlowHoleNode( float lowestFrequency = 10.0f, const ci::audio::Node::Format &format = Format() )
+		: BlowHole( lowestFrequency ), InstrumentNode( this, format )
+	{}
+};
 
-
-//BlowHole
-//Bowed
-
+class BowedNode : public InstrumentNode, public stk::Bowed {
+  public:
+	BowedNode( const ci::audio::Node::Format &format = Format() )
+		: InstrumentNode( this, format )
+	{}
+};
 
 } // namespace cistk

@@ -76,6 +76,8 @@ class StkTestApp : public App {
 	void setupParams();
 	void makeNote( const vec2 &pos );
 	float quantizePitch( const vec2 &pos );
+	void handleInstrumentSelected();
+	void handleEffectSelected();
 
 
 	ci::audio::GainNodeRef	mGain;
@@ -84,6 +86,8 @@ class StkTestApp : public App {
 	cistk::InstrumentNodeRef	mInstrument;
 
 	params::InterfaceGlRef	mParams;
+	vector<string>			mInstrumentEnumNames;
+	int						mInstrumentEnumSelection = 0;
 
 	float mLastFreq = 0;
 };
@@ -97,17 +101,12 @@ void StkTestApp::setup()
 
 	mStkNode = ctx->makeNode<StkTestNode>();
 	mGain = ctx->makeNode<audio::GainNode>( 0.75f );
-
-//	mBlowBottle = ctx->makeNode<cistk::InstrumentNode<stk::BlowBotl>>();
-	mInstrument = ctx->makeNode<cistk::BlowBotlNode>();
-
-//	mStkNode >> mGain >> ctx->getOutput();
-	mInstrument >> mGain >> ctx->getOutput();
-//	mBlowBottle->enable();
-
-	ctx->enable();
+	mGain >> ctx->getOutput();
 
 	setupParams();
+
+	handleInstrumentSelected();
+	ctx->enable();
 }
 
 void StkTestApp::setupParams()
@@ -119,6 +118,10 @@ void StkTestApp::setupParams()
 					  [this] { return mGain->getValue(); }
 	).min( 0.0f ).max( 1.0f ).step( 0.05f );
 
+	mInstrumentEnumNames = { "BandedWG", "BlowBotl", "BlowHole", "Bowed" };
+	mParams->addParam( "instrument", mInstrumentEnumNames, &mInstrumentEnumSelection )
+		.keyDecr( "[" ).keyIncr( "]" )
+		.updateFn( [this] { handleInstrumentSelected(); } );
 }
 
 void StkTestApp::mouseDown( MouseEvent event )
@@ -145,6 +148,39 @@ void StkTestApp::draw()
 	gl::clear();
 
 	mParams->draw();
+}
+
+void StkTestApp::handleInstrumentSelected()
+{
+	if( mInstrument )
+		mInstrument->disconnectAll();
+
+	string name = mInstrumentEnumNames.at( mInstrumentEnumSelection );
+	CI_LOG_I( "selecting instrument '" << name << "'" );
+
+	auto ctx = audio::master();
+	if( name == "BandedWG" ) {
+		auto instr = ctx->makeNode<cistk::BandedWGNode>();
+		instr->setPreset( 3 ); // preset: 'Tibetan Bowl'
+		mInstrument = instr;
+	}
+	else if( name == "BlowBotl" ) {
+		mInstrument = ctx->makeNode<cistk::BlowBotlNode>();
+	}
+	else if( name == "BlowHole" ) {
+		mInstrument = ctx->makeNode<cistk::BlowHoleNode>();
+	}
+	else if( name == "Bowed" ) {
+		mInstrument = ctx->makeNode<cistk::BowedNode>();
+	}
+
+	mInstrument >> mGain >> ctx->getOutput();
+
+	CI_LOG_I( "graph:\n" << ctx->printGraphToString() );
+}
+
+void StkTestApp::handleEffectSelected()
+{
 }
 
 void StkTestApp::makeNote( const vec2 &pos )
