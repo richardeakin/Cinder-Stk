@@ -14,56 +14,6 @@ using namespace ci;
 using namespace ci::app;
 using namespace std;
 
-typedef std::shared_ptr<class StkTestNode> StkTestNodeRef;
-
-class StkTestNode : public ci::audio::Node {
-public:
-	StkTestNode()
-		: Node( audio::Node::Format().channels( 2 ) )
-	{}
-
-protected:
-	void initialize() override
-	{
-		CI_LOG_I( "num channels: " << getNumChannels() );
-
-		mStkFrames = stk::StkFrames( getFramesPerBlock(), getNumChannels() );
-
-		mReverb.setEffectMix( 0.7f );
-
-		mReverb.setDamping( 0.6f );
-		mReverb.setRoomSize( 0.5f );
-	}
-
-
-	void process( ci::audio::Buffer *buffer ) override
-	{
-		mSynth.tick( mStkFrames );
-
-		// For Freeverb, copy channel 0 to channel 1
-		for( size_t i = 0; i < buffer->getNumFrames(); i++ ) {
-			mStkFrames( i, 1 ) = mStkFrames( i, 0 );
-		}
-
-		mReverb.tick( mStkFrames );
-
-		for( size_t ch = 0; ch < buffer->getNumChannels(); ch++ ) {
-			float *channel = buffer->getChannel( ch );
-			for( size_t i = 0; i < buffer->getNumFrames(); i++ ) {
-				channel[i] = mStkFrames( i, ch );
-			}
-		}
-	}
-
-public:
-	stk::Rhodey mSynth;
-//	stk::NRev	mReverb;
-//	stk::JCRev	mReverb;
-	stk::FreeVerb	mReverb;
-
-	stk::StkFrames mStkFrames;
-};
-
 class StkTestApp : public App {
   public:
 	void setup() override;
@@ -82,7 +32,6 @@ class StkTestApp : public App {
 	void printAudioGraph();
 
 	ci::audio::GainNodeRef	mGain;
-//	StkTestNodeRef			mStkNode;
 
 	cistk::InstrumentNodeRef	mInstrument;
 	cistk::EffectNodeRef		mEffect;
@@ -102,7 +51,6 @@ void StkTestApp::setup()
 	stk::Stk::setSampleRate( ctx->getSampleRate() );
 	cistk::initRawwavePath();
 
-//	mStkNode = ctx->makeNode<StkTestNode>();
 	mGain = ctx->makeNode<audio::GainNode>( 0.85f );
 	mGain >> ctx->getOutput();
 
@@ -140,7 +88,7 @@ void StkTestApp::setupParams()
 		"PRCRev", "JCRev", "NRev", "FreeVerb"
 	};
 	mParams->addParam( "effect", mEffectEnumNames, &mEffectEnumSelection )
-		.keyDecr( ";" ).keyIncr( "'" )
+		.keyDecr( "o" ).keyIncr( "p" )
 		.updateFn( [this] { handleEffectSelected(); printAudioGraph(); } );
 
 }
