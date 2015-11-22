@@ -320,6 +320,7 @@
 		01B97315FEAEA392516A2CEA /* Blocks */ = {
 			isa = PBXGroup;
 			children = (
+				1146C0471C00903500434C81 /* Synthesis Toolkit (STK) */,
 			);
 			name = Blocks;
 			sourceTree = "<group>";
@@ -327,8 +328,6 @@
 		080E96DDFE201D6D7F000001 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				1146C0391BFC363F00434C81 /* CinderSdk */,
-				1146BF061BF9CEEE00434C81 /* stk */,
 				701BD3D8B31D46E399D66AEE /* StkTestApp.cpp */,
 			);
 			name = Source;
@@ -552,14 +551,6 @@
 			path = ../../../lib/stk/src;
 			sourceTree = "<group>";
 		};
-		1146C0391BFC363F00434C81 /* CinderSdk */ = {
-			isa = PBXGroup;
-			children = (
-				1146C03D1BFD967400434C81 /* cistk */,
-			);
-			name = CinderSdk;
-			sourceTree = "<group>";
-		};
 		1146C03D1BFD967400434C81 /* cistk */ = {
 			isa = PBXGroup;
 			children = (
@@ -571,6 +562,15 @@
 				1146C03F1BFD968800434C81 /* Instruments.h */,
 			);
 			name = cistk;
+			sourceTree = "<group>";
+		};
+		1146C0471C00903500434C81 /* Synthesis Toolkit (STK) */ = {
+			isa = PBXGroup;
+			children = (
+				1146C03D1BFD967400434C81 /* cistk */,
+				1146BF061BF9CEEE00434C81 /* stk */,
+			);
+			name = "Synthesis Toolkit (STK)";
 			sourceTree = "<group>";
 		};
 		19C28FACFE9D520D11CA2CBB /* Products */ = {

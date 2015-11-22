@@ -20,7 +20,7 @@ void initRawwavePath()
 		fs::path rawwavePath = app::Platform::get()->getAssetPath( "rawwaves" );
 		if( rawwavePath.empty() ) {
 			// search for it relative to this source file
-			fs::path relativePath = fs::path( __FILE__ ).parent_path().parent_path() / "lib/stk/rawwaves";
+			fs::path relativePath = fs::path( __FILE__ ).parent_path().parent_path().parent_path() / "lib/stk/rawwaves";
 			if( fs::exists( relativePath ) && fs::is_directory( relativePath ) ) {
 				rawwavePath = relativePath;
 			}
