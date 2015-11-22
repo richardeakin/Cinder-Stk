@@ -2,7 +2,7 @@
 <cinder>
 <block
 	name="Synthesis Toolkit (STK)"
-	id="org.libcinder.dart"
+	id="org.libcinder.stk"
 	author="Perry R. Cook, Gary P. Scavone (block: Richard Eakin)"
 	license="BSD-like"
 	summary="The Synthesis ToolKit in C++ (STK) is a set of open source audio signal processing and algorithmic synthesis classes written in the C++ programming language."
