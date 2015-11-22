@@ -18,8 +18,6 @@ If you're installing with TinderBox and decide to copy the source to your projec
 You need to do two things before using (enabling cinder's audio processing graph) to use the STK classes:
 
 ```cpp
-auto ctx = ;
-
 stk::Stk::setSampleRate( audio::master()->getSampleRate() ); // 1) set the samplerate
 cistk::initRawwavePath(); // 2) configure the path to the rawwaves folder
 ```
