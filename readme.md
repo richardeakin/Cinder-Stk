@@ -2,6 +2,10 @@
 
 Wrapper to use the [Synthesis Toolkit](https://ccrma.stanford.edu/software/stk/index.html) with [Cinder](https://libcinder.org/).
 
+#### Brief
+
+The STK packages many C++ [classes](https://ccrma.stanford.edu/software/stk/classes.html) for audio processing, including instruments, effects, filters, and more. It is highly regarded for is cross-platform, raw design that allows it to be easily embeddable in various other systems. In this repo, I've only included the files for DSP, while `ci::audio` covers things like hardware I/O and processing the audio graph.
+
 For convenience, the Stk `Instrmnt` and `Effect` classes have been wrapped into `audio::Node` types so they can be easily connected with other cinder audio nodes. However this is adds a bit of indirection and copying so if best performance is crucial, it's recommended to make a custom `audio::Node` and run whatever STK algorithms and `tick()`s you like from a single `Node::process()`.
 
 #### Installation
