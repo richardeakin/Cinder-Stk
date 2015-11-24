@@ -94,7 +94,7 @@
 		1146C0371BF9CF1400434C81 /* Wurley.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1146BFD91BF9CF1400434C81 /* Wurley.cpp */; };
 		1146C0401BFD968800434C81 /* Instruments.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1146C03E1BFD968800434C81 /* Instruments.cpp */; };
 		1146C0431C00692300434C81 /* Effects.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1146C0411C00692300434C81 /* Effects.cpp */; };
-		1146C0461C008A1F00434C81 /* CinderStk.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1146C0451C008A1F00434C81 /* CinderStk.cpp */; };
+		1146C04A1C042CC300434C81 /* Util.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1146C0481C042CC300434C81 /* Util.cpp */; };
 		1B4FBAF1A0EB41D4A17DEF9B /* CinderApp.icns in Resources */ = {isa = PBXBuildFile; fileRef = 74D8AD52884141BCBED40CF0 /* CinderApp.icns */; };
 		5323E6B20EAFCA74003A9687 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5323E6B10EAFCA74003A9687 /* CoreVideo.framework */; };
 		59FE9D76F4804FB3AF36410B /* StkTestApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 701BD3D8B31D46E399D66AEE /* StkTestApp.cpp */; };
@@ -283,7 +283,8 @@
 		1146C0411C00692300434C81 /* Effects.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Effects.cpp; path = ../../../src/cistk/Effects.cpp; sourceTree = "<group>"; };
 		1146C0421C00692300434C81 /* Effects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Effects.h; path = ../../../src/cistk/Effects.h; sourceTree = "<group>"; };
 		1146C0441C008A1F00434C81 /* CinderStk.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CinderStk.h; path = ../../../src/cistk/CinderStk.h; sourceTree = "<group>"; };
-		1146C0451C008A1F00434C81 /* CinderStk.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CinderStk.cpp; path = ../../../src/cistk/CinderStk.cpp; sourceTree = "<group>"; };
+		1146C0481C042CC300434C81 /* Util.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Util.cpp; path = ../../../src/cistk/Util.cpp; sourceTree = "<group>"; };
+		1146C0491C042CC300434C81 /* Util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Util.h; path = ../../../src/cistk/Util.h; sourceTree = "<group>"; };
 		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		494B1585CCB949E49D57FC11 /* Resources.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Resources.h; path = ../include/Resources.h; sourceTree = "<group>"; };
@@ -554,12 +555,13 @@
 		1146C03D1BFD967400434C81 /* cistk */ = {
 			isa = PBXGroup;
 			children = (
-				1146C0451C008A1F00434C81 /* CinderStk.cpp */,
 				1146C0441C008A1F00434C81 /* CinderStk.h */,
 				1146C0411C00692300434C81 /* Effects.cpp */,
 				1146C0421C00692300434C81 /* Effects.h */,
 				1146C03E1BFD968800434C81 /* Instruments.cpp */,
 				1146C03F1BFD968800434C81 /* Instruments.h */,
+				1146C0481C042CC300434C81 /* Util.cpp */,
+				1146C0491C042CC300434C81 /* Util.h */,
 			);
 			name = cistk;
 			sourceTree = "<group>";
@@ -709,7 +711,6 @@
 				1146BFED1BF9CF1400434C81 /* Envelope.cpp in Sources */,
 				1146C0071BF9CF1400434C81 /* Mesh2D.cpp in Sources */,
 				1146BFF01BF9CF1400434C81 /* FileWrite.cpp in Sources */,
-				1146C0461C008A1F00434C81 /* CinderStk.cpp in Sources */,
 				1146BFEF1BF9CF1400434C81 /* FileRead.cpp in Sources */,
 				1146C0161BF9CF1400434C81 /* Plucked.cpp in Sources */,
 				1146BFF81BF9CF1400434C81 /* FreeVerb.cpp in Sources */,
@@ -724,6 +725,7 @@
 				1146C0361BF9CF1400434C81 /* Whistle.cpp in Sources */,
 				1146C0251BF9CF1400434C81 /* Sitar.cpp in Sources */,
 				1146C0061BF9CF1400434C81 /* Mandolin.cpp in Sources */,
+				1146C04A1C042CC300434C81 /* Util.cpp in Sources */,
 				1146BFDE1BF9CF1400434C81 /* BiQuad.cpp in Sources */,
 				1146C0241BF9CF1400434C81 /* SingWave.cpp in Sources */,
 				1146C0201BF9CF1400434C81 /* Saxofony.cpp in Sources */,
