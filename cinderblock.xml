@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <cinder>
 <block
-	name="Synthesis Toolkit (STK)"
+	name="Cinder-Stk"
 	id="org.libcinder.stk"
 	author="Perry R. Cook, Gary P. Scavone (block: Richard Eakin)"
 	license="BSD-like"
