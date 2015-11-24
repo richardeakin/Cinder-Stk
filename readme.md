@@ -22,6 +22,6 @@ stk::Stk::setSampleRate( audio::master()->getSampleRate() ); // 1) set the sampl
 cistk::initRawwavePath(); // 2) configure the path to the rawwaves folder
 ```
 
-Other than that seem the [StkTestApp](samples/StkTest/src/StkTestApp.cpp) for how to use the `InstrumentNode` or `EffectNode` wrappers, or their source for how to use STK directly.
+The easiest way to get started is to `#include "cistk/CinderStk.h"`, which will give you access to everything in the library. Other than that seem the [StkTestApp](samples/StkTest/src/StkTestApp.cpp) for how to use the `InstrumentNode` or `EffectNode` wrappers, or their source for how to use STK directly.
 
 See [here](https://libcinder.org/docs/guides/audio/index.html) for an overview on cinder's audio capabilities.

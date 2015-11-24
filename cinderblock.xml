@@ -11,13 +11,12 @@
 	libraryUrl="https://ccrma.stanford.edu/software/stk/"
 	>
 
-	<includePath>lib</includePath>
 	<includePath>src</includePath>
 
-	<headerPattern>lib/stk/include/*.h</headerPattern>
-	<sourcePattern>lib/stk/src/*.cpp</sourcePattern>
 	<headerPattern>src/cistk/*.h</headerPattern>
 	<sourcePattern>src/cistk/*.cpp</sourcePattern>
+	<headerPattern>src/stk/*.h</headerPattern>
+	<sourcePattern>src/stk/*.cpp</sourcePattern>
 
 </block>
 </cinder>
