@@ -27,7 +27,7 @@ void initRawwavePath()
 		}
 
 		if( ! rawwavePath.empty() ) {
-			stk::Stk::setRawwavePath( rawwavePath.c_str() );
+			stk::Stk::setRawwavePath( rawwavePath.string() );
 		}
 		else {
 			CI_LOG_E( "failed to find path to rawwaves directory" );

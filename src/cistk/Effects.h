@@ -4,6 +4,7 @@
 
 #pragma once
 
+#include "cinder/Cinder.h"
 #include "cinder/audio/Node.h"
 
 #include "stk/include/Stk.h"

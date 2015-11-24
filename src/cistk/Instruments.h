@@ -4,6 +4,7 @@
 
 #pragma once
 
+#include "cinder/Cinder.h"
 #include "cinder/audio/GenNode.h"
 
 #include "stk/include/Stk.h"
