@@ -7,16 +7,16 @@
 #include "cinder/Cinder.h"
 #include "cinder/audio/Node.h"
 
-#include "stk/include/Stk.h"
-#include "stk/include/Effect.h"
-#include "stk/include/Echo.h"
-#include "stk/include/Chorus.h"
-#include "stk/include/PitShift.h"
-#include "stk/include/LentPitShift.h"
-#include "stk/include/PRCRev.h"
-#include "stk/include/JCRev.h"
-#include "stk/include/NRev.h"
-#include "stk/include/FreeVerb.h"
+#include "stk/Stk.h"
+#include "stk/Effect.h"
+#include "stk/Echo.h"
+#include "stk/Chorus.h"
+#include "stk/PitShift.h"
+#include "stk/LentPitShift.h"
+#include "stk/PRCRev.h"
+#include "stk/JCRev.h"
+#include "stk/NRev.h"
+#include "stk/FreeVerb.h"
 
 namespace cistk {
 

@@ -10,7 +10,7 @@ For convenience, the Stk `Instrmnt` and `Effect` classes have been wrapped into 
 
 #### Installation
 
-If you're installing with TinderBox and decide to copy the source to your project, currently you'll have to additionally copy the STK's [rawwaves](lib/stk/rawwaves) folder into your assets directory to use some of the Instruments.  If you install as 'relative', it should just work when you call `cistk::initRawwavePath()`.
+If you're installing with TinderBox and decide to copy the source to your project, currently you'll have to additionally copy the STK's [rawwaves](assets/rawwaves) folder into your assets directory to use some of the Instruments.  If you install as 'relative', it should just work when you call `cistk::initRawwavePath()`.
 
 
 #### Usage
