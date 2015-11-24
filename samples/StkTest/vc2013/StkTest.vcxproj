@@ -1,5 +1,9 @@
 <Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug_ANGLE|Win32">
+      <Configuration>Debug_ANGLE</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
     <ProjectConfiguration Include="Debug|Win32">
       <Configuration>Debug</Configuration>
       <Platform>Win32</Platform>
@@ -7,6 +11,10 @@
     <ProjectConfiguration Include="Debug|x64">
       <Configuration>Debug</Configuration>
       <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release_ANGLE|Win32">
+      <Configuration>Release_ANGLE</Configuration>
+      <Platform>Win32</Platform>
     </ProjectConfiguration>
     <ProjectConfiguration Include="Release|Win32">
       <Configuration>Release</Configuration>
@@ -18,7 +26,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{CF417DD8-C8AA-46E9-8F4E-E9255A315D46}</ProjectGuid>
+    <ProjectGuid>{A0A32527-1472-4B53-A1C1-7B2E74B36E77}</ProjectGuid>
     <RootNamespace>StkTest</RootNamespace>
     <Keyword>Win32Proj</Keyword>
   </PropertyGroup>
@@ -49,6 +57,16 @@
     <PlatformToolset>v120</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug_ANGLE|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Release_ANGLE|Win32'">
+    <PlatformToolset>v120</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings" />
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
@@ -63,13 +81,19 @@
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug_ANGLE|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
     <_ProjectFileVersion>10.0.30319.1</_ProjectFileVersion>
     <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)$(Configuration)\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug_ANGLE|Win32'">$(SolutionDir)$(Configuration)\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(Configuration)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug_ANGLE|Win32'">$(Configuration)\</IntDir>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</LinkIncremental>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</LinkIncremental>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug_ANGLE|Win32'">true</LinkIncremental>
     <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)$(Configuration)\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(Configuration)\</IntDir>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkIncremental>
@@ -78,7 +102,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>..\include;"..\..\..\..\..\cinder-master\include"</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\include;"..\..\..\..\..\include";..\..\..\src</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_WIN32_WINNT=0x0601;_WINDOWS;NOMINMAX;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -89,11 +113,11 @@
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <ResourceCompile>
-      <AdditionalIncludeDirectories>"..\..\..\..\..\cinder-master\include";..\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>"..\..\..\..\..\include";..\include</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Link>
       <AdditionalDependencies>cinder-$(PlatformToolset)_d.lib;OpenGL32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>"..\..\..\..\..\cinder-master\lib\msw\$(PlatformTarget)"</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>"..\..\..\..\..\lib\msw\$(PlatformTarget)"</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
       <RandomizedBaseAddress>false</RandomizedBaseAddress>
@@ -105,7 +129,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>..\include;"..\..\..\..\..\cinder-master\include"</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\include;"..\..\..\..\..\include";..\..\..\src</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_WIN32_WINNT=0x0601;_WINDOWS;NOMINMAX;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
@@ -115,11 +139,11 @@
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <ResourceCompile>
-      <AdditionalIncludeDirectories>"..\..\..\..\..\cinder-master\include";..\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>"..\..\..\..\..\include";..\include</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Link>
       <AdditionalDependencies>cinder-$(PlatformToolset)_d.lib;OpenGL32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>"..\..\..\..\..\cinder-master\lib\msw\$(PlatformTarget)"</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>"..\..\..\..\..\lib\msw\$(PlatformTarget)"</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
       <RandomizedBaseAddress>false</RandomizedBaseAddress>
@@ -127,9 +151,41 @@
       <IgnoreSpecificDefaultLibraries>LIBCMT;LIBCPMT</IgnoreSpecificDefaultLibraries>
     </Link>
   </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug_ANGLE|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>..\include;"..\..\..\..\..\include";"..\..\..\..\..\include\ANGLE";..\..\..\src</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_WIN32_WINNT=0x0601;_WINDOWS;NOMINMAX;CINDER_GL_ANGLE;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <PrecompiledHeader />
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>"..\..\..\..\..\include";..\include</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Link>
+      <AdditionalDependencies>cinder-$(PlatformToolset)-ANGLE_d.lib;libEGL.lib;libGLESv2.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>"..\..\..\..\..\lib\msw\$(PlatformTarget)"</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <DataExecutionPrevention />
+      <TargetMachine>MachineX86</TargetMachine>
+      <IgnoreSpecificDefaultLibraries>LIBCMT;LIBCPMT</IgnoreSpecificDefaultLibraries>
+    </Link>
+    <PostBuildEvent>
+      <Command>xcopy /y "..\..\..\..\..\lib\msw\x86\libGLESv2.dll" "$(OutDir)"
+xcopy /y "..\..\..\..\..\lib\msw\x86\libEGL.dll" "$(OutDir)"
+xcopy /y "..\..\..\..\..\lib\msw\x86\d3dcompiler_46.dll" "$(OutDir)"</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>..\include;"..\..\..\..\..\cinder-master\include"</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\include;"..\..\..\..\..\include";..\..\..\src</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_WIN32_WINNT=0x0601;_WINDOWS;NOMINMAX;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <PrecompiledHeader />
@@ -141,11 +197,11 @@
       <LinkLibraryDependencies>true</LinkLibraryDependencies>
     </ProjectReference>
     <ResourceCompile>
-      <AdditionalIncludeDirectories>"..\..\..\..\..\cinder-master\include";..\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>"..\..\..\..\..\include";..\include</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Link>
       <AdditionalDependencies>cinder-$(PlatformToolset).lib;OpenGL32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>"..\..\..\..\..\cinder-master\lib\msw\$(PlatformTarget)"</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>"..\..\..\..\..\lib\msw\$(PlatformTarget)"</AdditionalLibraryDirectories>
       <GenerateDebugInformation>false</GenerateDebugInformation>
       <GenerateMapFile>true</GenerateMapFile>
       <SubSystem>Windows</SubSystem>
@@ -158,7 +214,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>..\include;"..\..\..\..\..\cinder-master\include"</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\include;"..\..\..\..\..\include";..\..\..\src</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_WIN32_WINNT=0x0601;_WINDOWS;NOMINMAX;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <PrecompiledHeader />
@@ -170,11 +226,11 @@
       <LinkLibraryDependencies>true</LinkLibraryDependencies>
     </ProjectReference>
     <ResourceCompile>
-      <AdditionalIncludeDirectories>"..\..\..\..\..\cinder-master\include";..\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>"..\..\..\..\..\include";..\include</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Link>
       <AdditionalDependencies>cinder-$(PlatformToolset).lib;OpenGL32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>"..\..\..\..\..\cinder-master\lib\msw\$(PlatformTarget)"</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>"..\..\..\..\..\lib\msw\$(PlatformTarget)"</AdditionalLibraryDirectories>
       <GenerateDebugInformation>false</GenerateDebugInformation>
       <GenerateMapFile>true</GenerateMapFile>
       <SubSystem>Windows</SubSystem>
@@ -184,6 +240,31 @@
       <DataExecutionPrevention />
     </Link>
   </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release_ANGLE|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>..\include;"..\..\..\..\..\include";"..\..\..\..\..\include\ANGLE";..\..\..\src</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_WIN32_WINNT=0x0601;_WINDOWS;NOMINMAX;CINDER_GL_ANGLE;NEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <Optimization>Disabled</Optimization>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>cinder-$(PlatformToolset)-ANGLE.lib;libEGL.lib;libGLESv2.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>"..\..\..\..\..\lib\msw\$(PlatformTarget)"</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <IgnoreSpecificDefaultLibraries />
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+    </Link>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_UNICODE;UNICODE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>"..\..\..\..\..\include";..\include</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <PostBuildEvent>
+      <Command>xcopy /y "..\..\..\..\..\lib\msw\x86\libGLESv2.dll" "$(OutDir)"
+xcopy /y "..\..\..\..\..\lib\msw\x86\libEGL.dll" "$(OutDir)"
+xcopy /y "..\..\..\..\..\lib\msw\x86\d3dcompiler_46.dll" "$(OutDir)"</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
   <ItemGroup>
     <ResourceCompile Include="Resources.rc" />
   </ItemGroup>
@@ -191,9 +272,182 @@
   <ItemGroup />
   <ItemGroup>
     <ClCompile Include="..\src\StkTestApp.cpp" />
+    <ClCompile Include="..\..\..\src\cistk\Effects.cpp" />
+    <ClCompile Include="..\..\..\src\cistk\Instruments.cpp" />
+    <ClCompile Include="..\..\..\src\cistk\Util.cpp" />
+    <ClCompile Include="..\..\..\src\stk\ADSR.cpp" />
+    <ClCompile Include="..\..\..\src\stk\Asymp.cpp" />
+    <ClCompile Include="..\..\..\src\stk\BandedWG.cpp" />
+    <ClCompile Include="..\..\..\src\stk\BeeThree.cpp" />
+    <ClCompile Include="..\..\..\src\stk\BiQuad.cpp" />
+    <ClCompile Include="..\..\..\src\stk\Blit.cpp" />
+    <ClCompile Include="..\..\..\src\stk\BlitSaw.cpp" />
+    <ClCompile Include="..\..\..\src\stk\BlitSquare.cpp" />
+    <ClCompile Include="..\..\..\src\stk\BlowBotl.cpp" />
+    <ClCompile Include="..\..\..\src\stk\BlowHole.cpp" />
+    <ClCompile Include="..\..\..\src\stk\Bowed.cpp" />
+    <ClCompile Include="..\..\..\src\stk\Brass.cpp" />
+    <ClCompile Include="..\..\..\src\stk\Chorus.cpp" />
+    <ClCompile Include="..\..\..\src\stk\Clarinet.cpp" />
+    <ClCompile Include="..\..\..\src\stk\Delay.cpp" />
+    <ClCompile Include="..\..\..\src\stk\DelayA.cpp" />
+    <ClCompile Include="..\..\..\src\stk\DelayL.cpp" />
+    <ClCompile Include="..\..\..\src\stk\Drummer.cpp" />
+    <ClCompile Include="..\..\..\src\stk\Echo.cpp" />
+    <ClCompile Include="..\..\..\src\stk\Envelope.cpp" />
+    <ClCompile Include="..\..\..\src\stk\FileLoop.cpp" />
+    <ClCompile Include="..\..\..\src\stk\FileRead.cpp" />
+    <ClCompile Include="..\..\..\src\stk\FileWrite.cpp" />
+    <ClCompile Include="..\..\..\src\stk\FileWvIn.cpp" />
+    <ClCompile Include="..\..\..\src\stk\FileWvOut.cpp" />
+    <ClCompile Include="..\..\..\src\stk\Fir.cpp" />
+    <ClCompile Include="..\..\..\src\stk\Flute.cpp" />
+    <ClCompile Include="..\..\..\src\stk\FM.cpp" />
+    <ClCompile Include="..\..\..\src\stk\FMVoices.cpp" />
+    <ClCompile Include="..\..\..\src\stk\FormSwep.cpp" />
+    <ClCompile Include="..\..\..\src\stk\FreeVerb.cpp" />
+    <ClCompile Include="..\..\..\src\stk\Granulate.cpp" />
+    <ClCompile Include="..\..\..\src\stk\Guitar.cpp" />
+    <ClCompile Include="..\..\..\src\stk\HevyMetl.cpp" />
+    <ClCompile Include="..\..\..\src\stk\Iir.cpp" />
+    <ClCompile Include="..\..\..\src\stk\JCRev.cpp" />
+    <ClCompile Include="..\..\..\src\stk\LentPitShift.cpp" />
+    <ClCompile Include="..\..\..\src\stk\Mandolin.cpp" />
+    <ClCompile Include="..\..\..\src\stk\Mesh2D.cpp" />
+    <ClCompile Include="..\..\..\src\stk\MidiFileIn.cpp" />
+    <ClCompile Include="..\..\..\src\stk\Modal.cpp" />
+    <ClCompile Include="..\..\..\src\stk\ModalBar.cpp" />
+    <ClCompile Include="..\..\..\src\stk\Modulate.cpp" />
+    <ClCompile Include="..\..\..\src\stk\Moog.cpp" />
+    <ClCompile Include="..\..\..\src\stk\Noise.cpp" />
+    <ClCompile Include="..\..\..\src\stk\NRev.cpp" />
+    <ClCompile Include="..\..\..\src\stk\OnePole.cpp" />
+    <ClCompile Include="..\..\..\src\stk\OneZero.cpp" />
+    <ClCompile Include="..\..\..\src\stk\PercFlut.cpp" />
+    <ClCompile Include="..\..\..\src\stk\Phonemes.cpp" />
+    <ClCompile Include="..\..\..\src\stk\PitShift.cpp" />
+    <ClCompile Include="..\..\..\src\stk\Plucked.cpp" />
+    <ClCompile Include="..\..\..\src\stk\PoleZero.cpp" />
+    <ClCompile Include="..\..\..\src\stk\PRCRev.cpp" />
+    <ClCompile Include="..\..\..\src\stk\Resonate.cpp" />
+    <ClCompile Include="..\..\..\src\stk\Rhodey.cpp" />
+    <ClCompile Include="..\..\..\src\stk\Sampler.cpp" />
+    <ClCompile Include="..\..\..\src\stk\Saxofony.cpp" />
+    <ClCompile Include="..\..\..\src\stk\Shakers.cpp" />
+    <ClCompile Include="..\..\..\src\stk\Simple.cpp" />
+    <ClCompile Include="..\..\..\src\stk\SineWave.cpp" />
+    <ClCompile Include="..\..\..\src\stk\SingWave.cpp" />
+    <ClCompile Include="..\..\..\src\stk\Sitar.cpp" />
+    <ClCompile Include="..\..\..\src\stk\Skini.cpp" />
+    <ClCompile Include="..\..\..\src\stk\Sphere.cpp" />
+    <ClCompile Include="..\..\..\src\stk\StifKarp.cpp" />
+    <ClCompile Include="..\..\..\src\stk\Stk.cpp" />
+    <ClCompile Include="..\..\..\src\stk\TapDelay.cpp" />
+    <ClCompile Include="..\..\..\src\stk\TubeBell.cpp" />
+    <ClCompile Include="..\..\..\src\stk\Twang.cpp" />
+    <ClCompile Include="..\..\..\src\stk\TwoPole.cpp" />
+    <ClCompile Include="..\..\..\src\stk\TwoZero.cpp" />
+    <ClCompile Include="..\..\..\src\stk\Voicer.cpp" />
+    <ClCompile Include="..\..\..\src\stk\VoicForm.cpp" />
+    <ClCompile Include="..\..\..\src\stk\Whistle.cpp" />
+    <ClCompile Include="..\..\..\src\stk\Wurley.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\Resources.h" />
+    <ClInclude Include="..\..\..\src\cistk\CinderStk.h" />
+    <ClInclude Include="..\..\..\src\cistk\Effects.h" />
+    <ClInclude Include="..\..\..\src\cistk\Instruments.h" />
+    <ClInclude Include="..\..\..\src\cistk\Util.h" />
+    <ClInclude Include="..\..\..\src\stk\ADSR.h" />
+    <ClInclude Include="..\..\..\src\stk\Asymp.h" />
+    <ClInclude Include="..\..\..\src\stk\BandedWG.h" />
+    <ClInclude Include="..\..\..\src\stk\BeeThree.h" />
+    <ClInclude Include="..\..\..\src\stk\BiQuad.h" />
+    <ClInclude Include="..\..\..\src\stk\Blit.h" />
+    <ClInclude Include="..\..\..\src\stk\BlitSaw.h" />
+    <ClInclude Include="..\..\..\src\stk\BlitSquare.h" />
+    <ClInclude Include="..\..\..\src\stk\BlowBotl.h" />
+    <ClInclude Include="..\..\..\src\stk\BlowHole.h" />
+    <ClInclude Include="..\..\..\src\stk\Bowed.h" />
+    <ClInclude Include="..\..\..\src\stk\BowTable.h" />
+    <ClInclude Include="..\..\..\src\stk\Brass.h" />
+    <ClInclude Include="..\..\..\src\stk\Chorus.h" />
+    <ClInclude Include="..\..\..\src\stk\Clarinet.h" />
+    <ClInclude Include="..\..\..\src\stk\Cubic.h" />
+    <ClInclude Include="..\..\..\src\stk\Delay.h" />
+    <ClInclude Include="..\..\..\src\stk\DelayA.h" />
+    <ClInclude Include="..\..\..\src\stk\DelayL.h" />
+    <ClInclude Include="..\..\..\src\stk\Drummer.h" />
+    <ClInclude Include="..\..\..\src\stk\Echo.h" />
+    <ClInclude Include="..\..\..\src\stk\Effect.h" />
+    <ClInclude Include="..\..\..\src\stk\Envelope.h" />
+    <ClInclude Include="..\..\..\src\stk\FileLoop.h" />
+    <ClInclude Include="..\..\..\src\stk\FileRead.h" />
+    <ClInclude Include="..\..\..\src\stk\FileWrite.h" />
+    <ClInclude Include="..\..\..\src\stk\FileWvIn.h" />
+    <ClInclude Include="..\..\..\src\stk\FileWvOut.h" />
+    <ClInclude Include="..\..\..\src\stk\Filter.h" />
+    <ClInclude Include="..\..\..\src\stk\Fir.h" />
+    <ClInclude Include="..\..\..\src\stk\Flute.h" />
+    <ClInclude Include="..\..\..\src\stk\FM.h" />
+    <ClInclude Include="..\..\..\src\stk\FMVoices.h" />
+    <ClInclude Include="..\..\..\src\stk\FormSwep.h" />
+    <ClInclude Include="..\..\..\src\stk\FreeVerb.h" />
+    <ClInclude Include="..\..\..\src\stk\Function.h" />
+    <ClInclude Include="..\..\..\src\stk\Generator.h" />
+    <ClInclude Include="..\..\..\src\stk\Granulate.h" />
+    <ClInclude Include="..\..\..\src\stk\Guitar.h" />
+    <ClInclude Include="..\..\..\src\stk\HevyMetl.h" />
+    <ClInclude Include="..\..\..\src\stk\Iir.h" />
+    <ClInclude Include="..\..\..\src\stk\Instrmnt.h" />
+    <ClInclude Include="..\..\..\src\stk\JCRev.h" />
+    <ClInclude Include="..\..\..\src\stk\JetTable.h" />
+    <ClInclude Include="..\..\..\src\stk\LentPitShift.h" />
+    <ClInclude Include="..\..\..\src\stk\Mandolin.h" />
+    <ClInclude Include="..\..\..\src\stk\Mesh2D.h" />
+    <ClInclude Include="..\..\..\src\stk\MidiFileIn.h" />
+    <ClInclude Include="..\..\..\src\stk\Modal.h" />
+    <ClInclude Include="..\..\..\src\stk\ModalBar.h" />
+    <ClInclude Include="..\..\..\src\stk\Modulate.h" />
+    <ClInclude Include="..\..\..\src\stk\Moog.h" />
+    <ClInclude Include="..\..\..\src\stk\Noise.h" />
+    <ClInclude Include="..\..\..\src\stk\NRev.h" />
+    <ClInclude Include="..\..\..\src\stk\OnePole.h" />
+    <ClInclude Include="..\..\..\src\stk\OneZero.h" />
+    <ClInclude Include="..\..\..\src\stk\PercFlut.h" />
+    <ClInclude Include="..\..\..\src\stk\Phonemes.h" />
+    <ClInclude Include="..\..\..\src\stk\PitShift.h" />
+    <ClInclude Include="..\..\..\src\stk\Plucked.h" />
+    <ClInclude Include="..\..\..\src\stk\PoleZero.h" />
+    <ClInclude Include="..\..\..\src\stk\PRCRev.h" />
+    <ClInclude Include="..\..\..\src\stk\ReedTable.h" />
+    <ClInclude Include="..\..\..\src\stk\Resonate.h" />
+    <ClInclude Include="..\..\..\src\stk\Rhodey.h" />
+    <ClInclude Include="..\..\..\src\stk\Sampler.h" />
+    <ClInclude Include="..\..\..\src\stk\Saxofony.h" />
+    <ClInclude Include="..\..\..\src\stk\Shakers.h" />
+    <ClInclude Include="..\..\..\src\stk\Simple.h" />
+    <ClInclude Include="..\..\..\src\stk\SineWave.h" />
+    <ClInclude Include="..\..\..\src\stk\SingWave.h" />
+    <ClInclude Include="..\..\..\src\stk\Sitar.h" />
+    <ClInclude Include="..\..\..\src\stk\Skini.h" />
+    <ClInclude Include="..\..\..\src\stk\SKINImsg.h" />
+    <ClInclude Include="..\..\..\src\stk\SKINItbl.h" />
+    <ClInclude Include="..\..\..\src\stk\Sphere.h" />
+    <ClInclude Include="..\..\..\src\stk\StifKarp.h" />
+    <ClInclude Include="..\..\..\src\stk\Stk.h" />
+    <ClInclude Include="..\..\..\src\stk\TapDelay.h" />
+    <ClInclude Include="..\..\..\src\stk\TubeBell.h" />
+    <ClInclude Include="..\..\..\src\stk\Twang.h" />
+    <ClInclude Include="..\..\..\src\stk\TwoPole.h" />
+    <ClInclude Include="..\..\..\src\stk\TwoZero.h" />
+    <ClInclude Include="..\..\..\src\stk\Vector3D.h" />
+    <ClInclude Include="..\..\..\src\stk\Voicer.h" />
+    <ClInclude Include="..\..\..\src\stk\VoicForm.h" />
+    <ClInclude Include="..\..\..\src\stk\Whistle.h" />
+    <ClInclude Include="..\..\..\src\stk\Wurley.h" />
+    <ClInclude Include="..\..\..\src\stk\WvIn.h" />
+    <ClInclude Include="..\..\..\src\stk\WvOut.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets" />
