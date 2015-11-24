@@ -3,7 +3,7 @@
 // The STK source code comes with its own BSD-style license, see lib/stk/LICENSE
 
 #include "cistk/Util.h"
-#include "stk/include/Stk.h"
+#include "stk/Stk.h"
 
 #include "cinder/Log.h"
 #include "cinder/app/Platform.h"
@@ -21,7 +21,7 @@ void initRawwavePath()
 		fs::path rawwavePath = app::Platform::get()->getAssetPath( "rawwaves" );
 		if( rawwavePath.empty() ) {
 			// search for it relative to this source file
-			fs::path relativePath = fs::path( __FILE__ ).parent_path().parent_path().parent_path() / "lib/stk/rawwaves";
+			fs::path relativePath = fs::path( __FILE__ ).parent_path().parent_path().parent_path() / "assets/rawwaves";
 			if( fs::exists( relativePath ) && fs::is_directory( relativePath ) ) {
 				rawwavePath = relativePath;
 			}

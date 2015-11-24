@@ -10,7 +10,7 @@ For convenience, the Stk `Instrmnt` and `Effect` classes have been wrapped into 
 
 #### Installation
 
-If you're installing with TinderBox and decide to copy the source to your project, currently you'll have to additionally copy the STK's [rawwaves](lib/stk/rawwaves) folder into your assets directory to use some of the Instruments.  If you install as 'relative', it should just work when you call `cistk::initRawwavePath()`.
+If you're installing with TinderBox and decide to copy the source to your project, currently you'll have to additionally copy the STK's [rawwaves](assets/rawwaves) folder into your assets directory to use some of the Instruments.  If you install as 'relative', it should just work when you call `cistk::initRawwavePath()`.
 
 
 #### Usage
@@ -22,6 +22,6 @@ stk::Stk::setSampleRate( audio::master()->getSampleRate() ); // 1) set the sampl
 cistk::initRawwavePath(); // 2) configure the path to the rawwaves folder
 ```
 
-Other than that seem the [StkTestApp](samples/StkTest/src/StkTestApp.cpp) for how to use the `InstrumentNode` or `EffectNode` wrappers, or their source for how to use STK directly.
+The easiest way to get started is to `#include "cistk/CinderStk.h"`, which will give you access to everything in the library. Other than that seem the [StkTestApp](samples/StkTest/src/StkTestApp.cpp) for how to use the `InstrumentNode` or `EffectNode` wrappers, or their source for how to use STK directly.
 
 See [here](https://libcinder.org/docs/guides/audio/index.html) for an overview on cinder's audio capabilities.
