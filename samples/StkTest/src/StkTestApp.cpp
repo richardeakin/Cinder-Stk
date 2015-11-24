@@ -225,9 +225,9 @@ void StkTestApp::handleInstrumentSelected()
 	else if( name == "Wurley" ) {
 		mInstrument = ctx->makeNode<cistk::WurleyNode>();
 	}
-    else if( name == "Whistle" ) {
-        mInstrument = ctx->makeNode<cistk::WhistleNode>();
-    }
+	else if( name == "Whistle" ) {
+		mInstrument = ctx->makeNode<cistk::WhistleNode>();
+	}
 	else {
 		CI_LOG_E( "unknowned instrument name" );
 		CI_ASSERT_NOT_REACHABLE();
