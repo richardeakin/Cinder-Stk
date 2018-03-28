@@ -24,10 +24,6 @@ namespace cistk {
 //! don't need to call enable(), instead you trigger them with stk::Instrmnt's noteOn() and noteOff methods.
 class EffectNode : public ci::audio::Node {
   public:
-    //! Reset and clear all internal state.
-    void clear()							{ mEffect->clear(); }
-	//! Set the mixture of input and "effected" levels in the output (0.0 = input only, 1.0 = effect only).
-	void setEffectMix( stk::StkFloat mix )	{ mEffect->setEffectMix( mix ); }
 
   protected:
 	EffectNode( stk::Effect *instrmnt, const ci::audio::Node::Format &format = Format() );
