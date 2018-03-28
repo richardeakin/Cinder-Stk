@@ -11,7 +11,7 @@ namespace cistk {
 InstrumentNode::InstrumentNode( stk::Instrmnt *instrument, const ci::audio::Node::Format &format )
 	: GenNode( format ), mInstrument( instrument )
 {
-	if( boost::indeterminate( format.getAutoEnable() ) )
+	if( ! format.isAutoEnableSet() )
 		setAutoEnabled( true );
 }
 
