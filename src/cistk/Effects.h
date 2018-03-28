@@ -131,7 +131,7 @@ class LentPitShiftNode : public EffectNode, public stk::LentPitShift {
 
 typedef std::shared_ptr<EffectNode>			EffectNodeRef;
 typedef std::shared_ptr<ChorusNode>			ChorusNodeRef;
-typedef std::shared_ptr<FreeVerbNode>		FreeVerNodeRef;
+typedef std::shared_ptr<FreeVerbNode>		FreeVerbNodeRef;
 typedef std::shared_ptr<JCRevNode>			JCRevNodeRef;
 typedef std::shared_ptr<NRevNode>			NRevNodeRef;
 typedef std::shared_ptr<PRCRevNode>			PRCRevNodeRef;
