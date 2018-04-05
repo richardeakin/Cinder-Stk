@@ -52,6 +52,8 @@ class ChorusNode : public EffectNode, public stk::Chorus {
 	void performTick( stk::StkFrames *frames ) override;
 };
 
+#if 0
+
 class EchoNode : public EffectNode, public stk::Echo {
   public:
 	EchoNode( unsigned long maximumDelay = stk::Stk::sampleRate(), const ci::audio::Node::Format &format = Format() )
@@ -61,6 +63,8 @@ class EchoNode : public EffectNode, public stk::Echo {
   protected:
 	void performTick( stk::StkFrames *frames ) override;
 };
+
+#endif
 
 class FreeVerbNode : public EffectNode, public stk::FreeVerb {
   public:
@@ -72,6 +76,7 @@ class FreeVerbNode : public EffectNode, public stk::FreeVerb {
 	void performTick( stk::StkFrames *frames ) override;
 };
 
+#if 0
 class JCRevNode : public EffectNode, public stk::JCRev {
   public:
 	JCRevNode( float T60 = 1, const ci::audio::Node::Format &format = Format() )
@@ -122,16 +127,17 @@ class LentPitShiftNode : public EffectNode, public stk::LentPitShift {
 	void performTick( stk::StkFrames *frames ) override;
 };
 
+#endif
 // -------------------
 // shared_ptr typedefs
 
 typedef std::shared_ptr<EffectNode>			EffectNodeRef;
 typedef std::shared_ptr<ChorusNode>			ChorusNodeRef;
 typedef std::shared_ptr<FreeVerbNode>		FreeVerbNodeRef;
-typedef std::shared_ptr<JCRevNode>			JCRevNodeRef;
-typedef std::shared_ptr<NRevNode>			NRevNodeRef;
-typedef std::shared_ptr<PRCRevNode>			PRCRevNodeRef;
-typedef std::shared_ptr<PitShiftNode>		PitShiftNodeRef;
-typedef std::shared_ptr<LentPitShiftNode>	LentPitShiftNodeRef;
+//typedef std::shared_ptr<JCRevNode>			JCRevNodeRef;
+//typedef std::shared_ptr<NRevNode>			NRevNodeRef;
+//typedef std::shared_ptr<PRCRevNode>			PRCRevNodeRef;
+//typedef std::shared_ptr<PitShiftNode>		PitShiftNodeRef;
+//typedef std::shared_ptr<LentPitShiftNode>	LentPitShiftNodeRef;
 
 } // namespace cistk

@@ -55,16 +55,18 @@ void ChorusNode::performTick( stk::StkFrames *frames )
 	tick( *frames );
 }
 
+#if 0
 void EchoNode::performTick( stk::StkFrames *frames )
 {
 	tick( *frames );
 }
-
+#endif
 void FreeVerbNode::performTick( stk::StkFrames *frames )
 {
 	tick( *frames );
 }
 
+#if 0
 void JCRevNode::performTick( stk::StkFrames *frames )
 {
 	tick( *frames );
@@ -90,4 +92,5 @@ void LentPitShiftNode::performTick( stk::StkFrames *frames )
 	tick( *frames );
 }
 
+#endif
 } // namespace cistk
