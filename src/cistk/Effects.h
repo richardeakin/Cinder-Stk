@@ -7,6 +7,8 @@
 #include "cinder/Cinder.h"
 #include "cinder/audio/Node.h"
 
+#include "cistk/EffectNode.h"
+
 #include "stk/Stk.h"
 #include "stk/Effect.h"
 #include "stk/Echo.h"
@@ -20,28 +22,6 @@
 
 namespace cistk {
 
-//! Base class for GenNodes that wrap an stk::Instrmnt. By defautl InstrumentNodes are auto-enabled so you
-//! don't need to call enable(), instead you trigger them with stk::Instrmnt's noteOn() and noteOff methods.
-class EffectNode : public ci::audio::Node {
-  public:
-
-  protected:
-	EffectNode( stk::Effect *instrmnt, const ci::audio::Node::Format &format = Format() );
-
-	void initialize() override;
-	void process( ci::audio::Buffer *buffer ) override;
-
-	//! Called by subclasses to copy frames to buffer
-	virtual void performTick( stk::StkFrames *frames ) = 0;
-
-  private:
-	stk::Effect*	mEffect;
-	stk::StkFrames	mStkFrames;
-};
-
-// ----------------
-// Effect sub-types
-
 class ChorusNode : public EffectNode, public stk::Chorus {
   public:
 	ChorusNode( float baseDelay = 6000, const ci::audio::Node::Format &format = Format() )
@@ -49,7 +29,7 @@ class ChorusNode : public EffectNode, public stk::Chorus {
 	{}
 
   protected:
-	void performTick( stk::StkFrames *frames ) override;
+	void performTick( stk::StkFrames *frames ) override	{ tick( *frames ); }
 };
 
 class EchoNode : public EffectNode, public stk::Echo {
@@ -59,7 +39,7 @@ class EchoNode : public EffectNode, public stk::Echo {
 	{}
 
   protected:
-	void performTick( stk::StkFrames *frames ) override;
+	void performTick( stk::StkFrames *frames ) override	{ tick( *frames ); }
 };
 
 class FreeVerbNode : public EffectNode, public stk::FreeVerb {
@@ -69,7 +49,7 @@ class FreeVerbNode : public EffectNode, public stk::FreeVerb {
 	{}
 
   protected:
-	void performTick( stk::StkFrames *frames ) override;
+	void performTick( stk::StkFrames *frames ) override	{ tick( *frames ); }
 };
 
 class JCRevNode : public EffectNode, public stk::JCRev {
@@ -79,7 +59,7 @@ class JCRevNode : public EffectNode, public stk::JCRev {
 	{}
 
   protected:
-	void performTick( stk::StkFrames *frames ) override;
+	void performTick( stk::StkFrames *frames ) override	{ tick( *frames ); }
 };
 
 class NRevNode : public EffectNode, public stk::NRev {
@@ -89,7 +69,7 @@ class NRevNode : public EffectNode, public stk::NRev {
 	{}
 
   protected:
-	void performTick( stk::StkFrames *frames ) override;
+	void performTick( stk::StkFrames *frames ) override	{ tick( *frames ); }
 };
 
 class PRCRevNode : public EffectNode, public stk::PRCRev {
@@ -99,7 +79,7 @@ class PRCRevNode : public EffectNode, public stk::PRCRev {
 	{}
 
   protected:
-	void performTick( stk::StkFrames *frames ) override;
+	void performTick( stk::StkFrames *frames ) override	{ tick( *frames ); }
 };
 
 class PitShiftNode : public EffectNode, public stk::PitShift {
@@ -109,7 +89,7 @@ class PitShiftNode : public EffectNode, public stk::PitShift {
 	{}
 
   protected:
-	void performTick( stk::StkFrames *frames ) override;
+	void performTick( stk::StkFrames *frames ) override	{ tick( *frames ); }
 };
 
 class LentPitShiftNode : public EffectNode, public stk::LentPitShift {
@@ -119,13 +99,12 @@ class LentPitShiftNode : public EffectNode, public stk::LentPitShift {
 	{}
 
   protected:
-	void performTick( stk::StkFrames *frames ) override;
+	void performTick( stk::StkFrames *frames ) override	{ tick( *frames ); }
 };
 
 // -------------------
 // shared_ptr typedefs
 
-typedef std::shared_ptr<EffectNode>			EffectNodeRef;
 typedef std::shared_ptr<ChorusNode>			ChorusNodeRef;
 typedef std::shared_ptr<FreeVerbNode>		FreeVerbNodeRef;
 typedef std::shared_ptr<JCRevNode>			JCRevNodeRef;

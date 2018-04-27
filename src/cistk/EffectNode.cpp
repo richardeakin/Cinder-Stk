@@ -2,7 +2,7 @@
 // Use of this source code is governed by a BSD-style license that can be found in the LICENSE.txt file.
 // The STK source code comes with its own BSD-style license, see lib/stk/LICENSE
 
-#include "cistk/Effects.h"
+#include "cistk/EffectNode.h"
 
 #include "cinder/Log.h"
 #include "cinder/audio/Context.h"
@@ -45,49 +45,6 @@ void EffectNode::process( audio::Buffer *buffer )
 			channel[i] = mStkFrames( i, ch );
 		}
 	}
-}
-
-// -------------------
-// Effect sub-types
-
-void ChorusNode::performTick( stk::StkFrames *frames )
-{
-	tick( *frames );
-}
-
-void EchoNode::performTick( stk::StkFrames *frames )
-{
-	tick( *frames );
-}
-
-void FreeVerbNode::performTick( stk::StkFrames *frames )
-{
-	tick( *frames );
-}
-
-void JCRevNode::performTick( stk::StkFrames *frames )
-{
-	tick( *frames );
-}
-
-void NRevNode::performTick( stk::StkFrames *frames )
-{
-	tick( *frames );
-}
-
-void PRCRevNode::performTick( stk::StkFrames *frames )
-{
-	tick( *frames );
-}
-
-void PitShiftNode::performTick( stk::StkFrames *frames )
-{
-	tick( *frames );
-}
-
-void LentPitShiftNode::performTick( stk::StkFrames *frames )
-{
-	tick( *frames );
 }
 
 } // namespace cistk

@@ -2,7 +2,7 @@
 // Use of this source code is governed by a BSD-style license that can be found in the LICENSE.txt file.
 // The STK source code comes with its own BSD-style license, see lib/stk/LICENSE
 
-#include "cistk/Instruments.h"
+#include "cistk/InstrumentNode.h"
 
 using namespace ci;
 

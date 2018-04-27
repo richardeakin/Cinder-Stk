@@ -50,12 +50,6 @@
     <ClInclude Include="..\..\..\src\cistk\Util.h">
       <Filter>Blocks\Cinder-Stk\src\cistk</Filter>
     </ClInclude>
-    <ClCompile Include="..\..\..\src\cistk\Effects.cpp">
-      <Filter>Blocks\Cinder-Stk\src\cistk</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\cistk\Instruments.cpp">
-      <Filter>Blocks\Cinder-Stk\src\cistk</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\src\cistk\Util.cpp">
       <Filter>Blocks\Cinder-Stk\src\cistk</Filter>
     </ClCompile>
@@ -557,10 +551,22 @@
     <ClCompile Include="..\..\..\src\stk\Wurley.cpp">
       <Filter>Blocks\Cinder-Stk\src\stk</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\src\cistk\EffectNode.cpp">
+      <Filter>Blocks\Cinder-Stk\src\cistk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\cistk\InstrumentNode.cpp">
+      <Filter>Blocks\Cinder-Stk\src\cistk</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\Resources.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\cistk\EffectNode.h">
+      <Filter>Blocks\Cinder-Stk\src\cistk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\cistk\InstrumentNode.h">
+      <Filter>Blocks\Cinder-Stk\src\cistk</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
