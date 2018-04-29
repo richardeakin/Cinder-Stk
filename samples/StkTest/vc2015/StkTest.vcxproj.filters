@@ -557,6 +557,9 @@
     <ClCompile Include="..\..\..\src\cistk\InstrumentNode.cpp">
       <Filter>Blocks\Cinder-Stk\src\cistk</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\src\cistk\GeneratorNode.cpp">
+      <Filter>Blocks\Cinder-Stk\src\cistk</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\Resources.h">
@@ -566,6 +569,12 @@
       <Filter>Blocks\Cinder-Stk\src\cistk</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\cistk\InstrumentNode.h">
+      <Filter>Blocks\Cinder-Stk\src\cistk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\cistk\GeneratorNode.h">
+      <Filter>Blocks\Cinder-Stk\src\cistk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\cistk\Generators.h">
       <Filter>Blocks\Cinder-Stk\src\cistk</Filter>
     </ClInclude>
   </ItemGroup>

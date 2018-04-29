@@ -273,6 +273,7 @@ xcopy /y "..\..\..\..\..\lib\msw\x86\d3dcompiler_46.dll" "$(OutDir)"</Command>
   <ItemGroup />
   <ItemGroup>
     <ClCompile Include="..\..\..\src\cistk\EffectNode.cpp" />
+    <ClCompile Include="..\..\..\src\cistk\GeneratorNode.cpp" />
     <ClCompile Include="..\..\..\src\cistk\InstrumentNode.cpp" />
     <ClCompile Include="..\src\StkTestApp.cpp" />
     <ClCompile Include="..\..\..\src\cistk\Util.cpp" />
@@ -355,6 +356,8 @@ xcopy /y "..\..\..\..\..\lib\msw\x86\d3dcompiler_46.dll" "$(OutDir)"</Command>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\src\cistk\EffectNode.h" />
+    <ClInclude Include="..\..\..\src\cistk\GeneratorNode.h" />
+    <ClInclude Include="..\..\..\src\cistk\Generators.h" />
     <ClInclude Include="..\..\..\src\cistk\InstrumentNode.h" />
     <ClInclude Include="..\include\Resources.h" />
     <ClInclude Include="..\..\..\src\cistk\CinderStk.h" />

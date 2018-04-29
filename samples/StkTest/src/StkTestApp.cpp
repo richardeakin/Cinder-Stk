@@ -27,18 +27,22 @@ class StkTestApp : public App {
 	void makeNote( const vec2 &pos );
 	float quantizePitch( const vec2 &pos );
 	void handleInstrumentSelected();
+	void handleGeneratorSelected();
 	void handleEffectSelected();
 	bool handleInstrumentSpecificNote( const vec2 &pos );
 	void printAudioGraph();
 
 	ci::audio::GainNodeRef	mGain;
 
+	// note: either last Instrument or last Generator will be used as input.
 	cistk::InstrumentNodeRef	mInstrument;
+	cistk::GeneratorNodeRef		mGenerator;
 	cistk::EffectNodeRef		mEffect;
 
 	params::InterfaceGlRef	mParams;
-	vector<string>			mInstrumentEnumNames, mEffectEnumNames;
-	int						mInstrumentEnumSelection = 12;
+	vector<string>			mInstrumentEnumNames, mGeneratorEnumNames, mEffectEnumNames;
+	int						mInstrumentEnumSelection = 13;
+	int						mGeneratorEnumSelection = 0;
 	int						mEffectEnumSelection = 7;
 
 	float mLastFreq = 0;
@@ -73,7 +77,7 @@ void StkTestApp::setupParams()
 	).min( 0.0f ).max( 1.0f ).step( 0.05f );
 
 	mInstrumentEnumNames = {
-		"BandedWG", "BlowBotl", "BlowHole", "Bowed", "Brass", "Clarinet",
+		"none", "BandedWG", "BlowBotl", "BlowHole", "Bowed", "Brass", "Clarinet",
 		"Drummer", "Flute", "Mandolin", "Mesh2D", "ModalBar", "Moog",
 		"Plucked", "Resonate", "Saxofony", "Shakers", "Simple",	"Sitar",
 		"StifKarp", "VoicForm", "Whistle",	"BeeThree", "FMVoices", "HevyMetl",
@@ -82,6 +86,13 @@ void StkTestApp::setupParams()
 	mParams->addParam( "instrument", mInstrumentEnumNames, &mInstrumentEnumSelection )
 		.keyDecr( "[" ).keyIncr( "]" )
 		.updateFn( [this] { handleInstrumentSelected(); printAudioGraph(); } );
+
+	mGeneratorEnumNames = {
+		"none", "Blit", "Granulate"
+	};
+	mParams->addParam( "generator", mGeneratorEnumNames, &mGeneratorEnumSelection )
+		.keyDecr( "u" ).keyIncr( "i" )
+		.updateFn( [this] { handleGeneratorSelected(); printAudioGraph(); } );
 
 	mEffectEnumNames = {
 		"none", "Echo", "Chorus", "PitShift", "LentPitShift",
@@ -110,7 +121,12 @@ void StkTestApp::mouseDrag( MouseEvent event )
 
 void StkTestApp::mouseUp( MouseEvent event )
 {
-	mInstrument->noteOff( 0.5 );
+	if( mInstrument ) {
+		mInstrument->noteOff( 0.5 );
+	}
+	else if( mGenerator ) {
+		// TODO: ramp down generator gain
+	}
 }
 
 void StkTestApp::update()
@@ -128,6 +144,10 @@ void StkTestApp::handleInstrumentSelected()
 {
 	if( mInstrument )
 		mInstrument->disconnectAll();
+	if( mGenerator )
+		mGenerator->disconnectAll();
+
+	mGeneratorEnumSelection = 0; // set to "none"
 
 	string name = mInstrumentEnumNames.at( mInstrumentEnumSelection );
 	CI_LOG_I( "selecting instrument '" << name << "'" );
@@ -243,9 +263,46 @@ void StkTestApp::handleInstrumentSelected()
 	mGain >> ctx->getOutput();
 }
 
+void StkTestApp::handleGeneratorSelected()
+{
+	if( mInstrument )
+		mInstrument->disconnectAll();
+	if( mGenerator )
+		mGenerator->disconnectAll();
+
+	mInstrument = nullptr;
+	mInstrumentEnumSelection = 0; // set to "none"
+
+	string name = mGeneratorEnumNames.at( mGeneratorEnumSelection );
+	CI_LOG_I( "selecting generator '" << name << "'" );
+
+	auto ctx = audio::master();
+	if( name == "Blit" ) {
+		mGenerator = ctx->makeNode<cistk::BlitNode>();
+	}
+	else if( name == "Granulate" ) {
+		auto gen = ctx->makeNode<cistk::GranulateNode>();
+		//instr->setPreset( 3 ); // preset: 'Tibetan Bowl'
+		mGenerator = gen;
+	}
+	else {
+		CI_LOG_E( "unknowned generator name" );
+		CI_ASSERT_NOT_REACHABLE();
+	}
+
+	if( mEffect ) {
+		mGenerator >> mEffect >> mGain;
+	}
+	else {
+		mGenerator >> mGain;
+	}
+
+	mGain >> ctx->getOutput();
+}
+
 void StkTestApp::handleEffectSelected()
 {
-	CI_ASSERT( mInstrument );
+	CI_ASSERT( mInstrument || mGenerator );
 
 	mGain->disconnectAll();
 	if( mEffect )
@@ -295,7 +352,12 @@ void StkTestApp::handleEffectSelected()
 		CI_ASSERT_NOT_REACHABLE();
 	}
 
-	mInstrument >> mEffect >> mGain >> ctx->getOutput();
+	if( mInstrument )
+		mInstrument >> mEffect;
+	else
+		mGenerator >> mEffect;
+
+	mEffect >> mGain >> ctx->getOutput();
 }
 
 void StkTestApp::makeNote( const vec2 &pos )
@@ -310,8 +372,16 @@ void StkTestApp::makeNote( const vec2 &pos )
 
 	mLastFreq = freq;
 
-	float gain = 1.0f - pos.y / (float)getWindowHeight();
-	mInstrument->noteOn( freq, gain );
+	if( mInstrument ) {
+		float gain = 1.0f - pos.y / (float)getWindowHeight();
+		mInstrument->noteOn( freq, gain );
+	}
+	else if( mGenerator ) {
+		auto blitNode = dynamic_pointer_cast<cistk::BlitNode>( mGenerator );
+		if( blitNode ) {
+			blitNode->setFrequency( freq );
+		}
+	}
 }
 
 // Returns true if the note was handled completely and makeNote() shouldn't do anything else

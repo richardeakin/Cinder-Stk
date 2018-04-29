@@ -93,5 +93,6 @@
 
 #include "cistk/Instruments.h"
 #include "cistk/Effects.h"
+#include "cistk/Generators.h"
 #include "cistk/Util.h"
 
