@@ -5,39 +5,10 @@
 #pragma once
 
 #include "cinder/Cinder.h"
-#include "cinder/audio/GenNode.h"
+#include "cinder/audio/InputNode.h"
 
 #include "stk/Stk.h"
 #include "stk/Instrmnt.h"
-#include "stk/BandedWG.h"
-#include "stk/BlowBotl.h"
-#include "stk/BlowHole.h"
-#include "stk/Bowed.h"
-#include "stk/Brass.h"
-#include "stk/Clarinet.h"
-#include "stk/Drummer.h"
-#include "stk/Flute.h"
-#include "stk/Mandolin.h"
-#include "stk/Mesh2D.h"
-#include "stk/ModalBar.h"
-#include "stk/Moog.h"
-#include "stk/Plucked.h"
-#include "stk/Resonate.h"
-#include "stk/Saxofony.h"
-#include "stk/Shakers.h"
-#include "stk/Simple.h"
-#include "stk/Sitar.h"
-#include "stk/StifKarp.h"
-#include "stk/VoicForm.h"
-#include "stk/Whistle.h"
-
-#include "stk/BeeThree.h"
-#include "stk/FMVoices.h"
-#include "stk/HevyMetl.h"
-#include "stk/PercFlut.h"
-#include "stk/Rhodey.h"
-#include "stk/TubeBell.h"
-#include "stk/Wurley.h"
 
 namespace cistk {
 
@@ -45,7 +16,7 @@ typedef std::shared_ptr<class InstrumentNode>		InstrumentNodeRef;
 
 //! Base class for GenNodes that wrap an stk::Instrmnt. By defautl InstrumentNodes are auto-enabled so you
 //! don't need to call enable(), instead you trigger them with stk::Instrmnt's noteOn() and noteOff methods.
-class InstrumentNode : public ci::audio::GenNode {
+class InstrumentNode : public ci::audio::InputNode {
   public:
     //! Reset and clear all internal state (for subclasses).
     void clear()													{ mInstrument->clear(); }

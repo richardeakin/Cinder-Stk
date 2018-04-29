@@ -9,7 +9,7 @@ using namespace ci;
 namespace cistk {
 
 InstrumentNode::InstrumentNode( stk::Instrmnt *instrument, const ci::audio::Node::Format &format )
-	: GenNode( format ), mInstrument( instrument )
+	: InputNode( format ), mInstrument( instrument )
 {
 	if( ! format.isAutoEnableSet() )
 		setAutoEnabled( true );

@@ -9,8 +9,6 @@
 
 #include "cistk/InstrumentNode.h"
 
-#include "stk/Stk.h"
-#include "stk/Instrmnt.h"
 #include "stk/BandedWG.h"
 #include "stk/BlowBotl.h"
 #include "stk/BlowHole.h"
