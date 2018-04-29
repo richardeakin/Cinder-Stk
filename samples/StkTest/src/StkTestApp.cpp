@@ -32,12 +32,14 @@ class StkTestApp : public App {
 	bool handleInstrumentSpecificNote( const vec2 &pos );
 	void printAudioGraph();
 
-	ci::audio::GainNodeRef	mGain;
+	ci::audio::GainNodeRef	mMasterGain;
 
 	// note: either last Instrument or last Generator will be used as input.
 	cistk::InstrumentNodeRef	mInstrument;
 	cistk::GeneratorNodeRef		mGenerator;
 	cistk::EffectNodeRef		mEffect;
+
+	ci::audio::GainNodeRef	mGeneratorGain;
 
 	params::InterfaceGlRef	mParams;
 	vector<string>			mInstrumentEnumNames, mGeneratorEnumNames, mEffectEnumNames;
@@ -55,8 +57,11 @@ void StkTestApp::setup()
 	stk::Stk::setSampleRate( ctx->getSampleRate() );
 	cistk::initRawwavePath();
 
-	mGain = ctx->makeNode<audio::GainNode>( 0.85f );
-	mGain >> ctx->getOutput();
+	mMasterGain = ctx->makeNode<audio::GainNode>( 0.85f );
+	mMasterGain >> ctx->getOutput();
+
+	// Generators don't have a gain like instruments, so map mouse y to this node's value
+	mGeneratorGain = ctx->makeNode<audio::GainNode>( 0 );
 
 	setupParams();
 
@@ -72,8 +77,8 @@ void StkTestApp::setupParams()
 	mParams = params::InterfaceGl::create( getWindow(), "Stk params", toPixels( ivec2( 300, 200 ) ) );
 
 	mParams->addParam<float>( "master gain",
-					  [this]( float value ) { mGain->setValue( value ); },
-					  [this] { return mGain->getValue(); }
+					  [this]( float value ) { mMasterGain->setValue( value ); },
+					  [this] { return mMasterGain->getValue(); }
 	).min( 0.0f ).max( 1.0f ).step( 0.05f );
 
 	mInstrumentEnumNames = {
@@ -125,7 +130,7 @@ void StkTestApp::mouseUp( MouseEvent event )
 		mInstrument->noteOff( 0.5 );
 	}
 	else if( mGenerator ) {
-		// TODO: ramp down generator gain
+		mGeneratorGain->getParam()->applyRamp( 0, 0.2f );
 	}
 }
 
@@ -148,6 +153,8 @@ void StkTestApp::handleInstrumentSelected()
 		mGenerator->disconnectAll();
 
 	mGeneratorEnumSelection = 0; // set to "none"
+	mGenerator = nullptr;
+	mGeneratorGain->setValue( 0 );
 
 	string name = mInstrumentEnumNames.at( mInstrumentEnumSelection );
 	CI_LOG_I( "selecting instrument '" << name << "'" );
@@ -254,13 +261,13 @@ void StkTestApp::handleInstrumentSelected()
 	}
 
 	if( mEffect ) {
-		mInstrument >> mEffect >> mGain;
+		mInstrument >> mEffect >> mMasterGain;
 	}
 	else {
-		mInstrument >> mGain;
+		mInstrument >> mMasterGain;
 	}
 
-	mGain >> ctx->getOutput();
+	mMasterGain >> ctx->getOutput();
 }
 
 void StkTestApp::handleGeneratorSelected()
@@ -281,8 +288,7 @@ void StkTestApp::handleGeneratorSelected()
 		mGenerator = ctx->makeNode<cistk::BlitNode>();
 	}
 	else if( name == "Granulate" ) {
-		auto gen = ctx->makeNode<cistk::GranulateNode>();
-		//instr->setPreset( 3 ); // preset: 'Tibetan Bowl'
+		auto gen = ctx->makeNode<cistk::GranulateNode>( 1, stk::Stk::rawwavePath() + "ahh.raw", true );
 		mGenerator = gen;
 	}
 	else {
@@ -291,20 +297,20 @@ void StkTestApp::handleGeneratorSelected()
 	}
 
 	if( mEffect ) {
-		mGenerator >> mEffect >> mGain;
+		mGenerator >> mGeneratorGain >> mEffect >> mMasterGain;
 	}
 	else {
-		mGenerator >> mGain;
+		mGenerator >> mGeneratorGain >> mMasterGain;
 	}
 
-	mGain >> ctx->getOutput();
+	mMasterGain >> ctx->getOutput();
 }
 
 void StkTestApp::handleEffectSelected()
 {
 	CI_ASSERT( mInstrument || mGenerator );
 
-	mGain->disconnectAll();
+	mMasterGain->disconnectAll();
 	if( mEffect )
 		mEffect->disconnectAll();
 
@@ -316,7 +322,7 @@ void StkTestApp::handleEffectSelected()
 	if( name == "none" ) {
 		// reset and bypass effect
 		mEffect.reset();
-		mInstrument >> mGain >> ctx->getOutput();
+		mInstrument >> mMasterGain >> ctx->getOutput();
 		return;
 	}
 	else if( name == "Echo" ) {
@@ -357,12 +363,12 @@ void StkTestApp::handleEffectSelected()
 	else
 		mGenerator >> mEffect;
 
-	mEffect >> mGain >> ctx->getOutput();
+	mEffect >> mMasterGain >> ctx->getOutput();
 }
 
 void StkTestApp::makeNote( const vec2 &pos )
 {
-	if( handleInstrumentSpecificNote( pos ) )
+	if( mInstrument && handleInstrumentSpecificNote( pos ) )
 		return;
 
 	float freq = quantizePitch( pos );
@@ -372,14 +378,22 @@ void StkTestApp::makeNote( const vec2 &pos )
 
 	mLastFreq = freq;
 
+	float gain = 1.0f - pos.y / (float)getWindowHeight();
 	if( mInstrument ) {
-		float gain = 1.0f - pos.y / (float)getWindowHeight();
 		mInstrument->noteOn( freq, gain );
 	}
 	else if( mGenerator ) {
+		mGeneratorGain->getParam()->applyRamp( gain, 0.05f );
+
 		auto blitNode = dynamic_pointer_cast<cistk::BlitNode>( mGenerator );
 		if( blitNode ) {
 			blitNode->setFrequency( freq );
+			return;
+		}
+		auto granulatorNode = dynamic_pointer_cast<cistk::GranulateNode>( mGenerator );
+		if( granulatorNode ) {
+
+			return;
 		}
 	}
 }

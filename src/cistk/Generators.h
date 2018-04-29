@@ -27,6 +27,10 @@ public:
 		: GeneratorNode( this, format )
 	{}
 
+	GranulateNode( unsigned int nVoices, std::string fileName, bool typeRaw = false, const ci::audio::Node::Format &format = Format() )
+		: GeneratorNode( this, format ), Granulate( nVoices, fileName, typeRaw )
+	{}
+
 protected:
 	void performTick( stk::StkFrames *frames ) override	{ tick( *frames ); }
 };
