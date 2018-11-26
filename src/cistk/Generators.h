@@ -31,6 +31,34 @@ public:
 		: GeneratorNode( this, format ), Granulate( nVoices, fileName, typeRaw )
 	{}
 
+	// TODO: move these to stk::Granulate
+	unsigned int voices() const				{ return grains_.size(); }
+	unsigned int grainDuration() const		{ return gDuration_; }
+	unsigned int grainRampPercent() const	{ return gRampPercent_; }
+	unsigned int grainDelay() const			{ return gDelay_; }
+	int grainOffset() const					{ return gOffset_; }
+	float randomFactor() const				{ return gRandomFactor_; }
+
+	void loadBuffer( const ci::audio::Buffer &buffer )
+	{
+		data_.resize( buffer.getNumFrames(), buffer.getNumChannels() );
+		for( size_t ch = 0; ch < buffer.getNumChannels(); ch++ ) {
+			const float *channel = buffer.getChannel( ch );
+			for( size_t i = 0; i < buffer.getNumFrames(); i++ ) {
+				data_( i, ch ) = channel[i];
+			}
+		}
+
+		lastFrame_.resize( 1, buffer.getNumChannels(), 0.0 );
+
+		Granulate::reset();
+	}
+
+	void loadBuffer( const ci::audio::BufferRef &buffer )
+	{
+		loadBuffer( *buffer );
+	}
+
 protected:
 	void performTick( stk::StkFrames *frames ) override	{ tick( *frames ); }
 };

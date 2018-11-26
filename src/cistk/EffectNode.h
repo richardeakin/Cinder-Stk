@@ -29,7 +29,7 @@ class EffectNode : public ci::audio::Node {
 	virtual void performTick( stk::StkFrames *frames ) = 0;
 
   private:
-	stk::Effect*	mEffect;
+	stk::Effect*	mEffect; // TODO: remove if not used (think it was copied from InstrumentNode
 	stk::StkFrames	mStkFrames;
 };
 
